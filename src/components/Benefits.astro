@@ -1,13 +1,15 @@
 ---
 import { benefits } from "../utils/constains";
 import BenefitCard from "./BenefitCard.astro";
+import Title from "./Title.astro";
 ---
 
 <section>
-  <div class="m-14">
-    <h1 class="font-Oliciy text-5xl pb-9 text-[#F28705]">Beneficios</h1>
+  <Title title="Beneficios" />
 
-    <div class="flex flex-col gap-11">
+  <div class="flex gap-4">
+    <div class="w-full"></div>
+    <div class="w-full flex flex-col gap-11">
       {
         benefits.map((benefit) => (
           <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
@@ -17,40 +19,40 @@ import BenefitCard from "./BenefitCard.astro";
       }
 
       <!-- <div class="flex justify-start">
-        <div>
-          <Setting width={40} height={40} fill="#F28705" />
-        </div>
-        <div class="ml-2">
-          <h1>Fácil implementación</h1>
-          <h2>Integración sin complicaciones ni pérdida de tiempo.</h2>
-        </div>
-      </div>
-
-      <div class="flex justify-start">
-        <div>
-          <Security width={40} height={40} fill="#F28705" />
-        </div>
-        <div class="ml-2">
-          <h1>Mayor seguridad</h1>
-          <h2>
-            Refuerza la seguridad escolar con procesos de salida totalmente
-            verificados.
-          </h2>
-        </div>
-      </div>
-
-      <div class="flex justify-start">
-        <div>
-          <Family width={40} height={40} fill="#F28705" />
-        </div>
-        <div class="ml-2">
-          <h1>Colaboración con padres</h1>
-          <h2>
-            Facilita la comunicación y cooperación entre padres y personal
-            escolar.
-          </h2>
-        </div>
-      </div> -->
+            <div>
+              <Setting width={40} height={40} fill="#F28705" />
+            </div>
+            <div class="ml-2">
+              <h1>Fácil implementación</h1>
+              <h2>Integración sin complicaciones ni pérdida de tiempo.</h2>
+            </div>
+          </div>
+    
+          <div class="flex justify-start">
+            <div>
+              <Security width={40} height={40} fill="#F28705" />
+            </div>
+            <div class="ml-2">
+              <h1>Mayor seguridad</h1>
+              <h2>
+                Refuerza la seguridad escolar con procesos de salida totalmente
+                verificados.
+              </h2>
+            </div>
+          </div>
+    
+          <div class="flex justify-start">
+            <div>
+              <Family width={40} height={40} fill="#F28705" />
+            </div>
+            <div class="ml-2">
+              <h1>Colaboración con padres</h1>
+              <h2>
+                Facilita la comunicación y cooperación entre padres y personal
+                escolar.
+              </h2>
+            </div>
+          </div> -->
     </div>
   </div>
 </section>

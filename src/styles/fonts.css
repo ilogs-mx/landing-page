@@ -1,0 +1,144 @@
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-BoldItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-Black.woff2") format("woff2"),
+    url("fonts/NobelUno-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-Bold.woff2") format("woff2"),
+    url("fonts/NobelUno-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-SemiBold.woff2") format("woff2"),
+    url("fonts/NobelUno-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-Italic.woff2") format("woff2"),
+    url("fonts/NobelUno-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-LightItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-Thin.woff2") format("woff2"),
+    url("fonts/NobelUno-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-ThinItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-SemiBoldItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-SemiBoldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-ExtraLight.woff2") format("woff2"),
+    url("fonts/NobelUno-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-Medium.woff2") format("woff2"),
+    url("fonts/NobelUno-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-Regular.woff2") format("woff2"),
+    url("fonts/NobelUno-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-MediumItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-BlackItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-BlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nobel Uno";
+  src: url("fonts/NobelUno-ExtraLightItalic.woff2") format("woff2"),
+    url("fonts/NobelUno-ExtraLightItalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oliciy";
+  src: url("fonts/Oliciy.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+

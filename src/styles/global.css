@@ -1,61 +1,9 @@
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme {
     --color-primary: #F28705;
-}
 
-/* Carga de Fuentes para la Langing page: Oliciy, Aloevera y nobeluno */
-
-
-@font-face {
-    font-family:"Oliciy";
-    src: url("../../public/fonts/Oliciy.woff2") format("woff2");
-    font-weight: 100 700;
-    font-display: swap;
-
-}
-
-@font-face {
-    font-family:"AloeveraDisplay";
-    src: url("../../public/fonts/AloeveraDisplay-Regular.woff2") format("woff2");
-    font-weight: 100 700;
-    font-display: swap;
-
-}
-
-@font-face {
-    font-family:"AloeveraDisplay";
-    src: url("../../public/fonts/AloeveraDisplay-Bold.woff2") format("woff2");
-    font-weight: 100 700;
-    font-display: swap;
-
-}
-
-@font-face {
-    font-family:"NobelUno";
-    src: url("../../public/fonts/NobelUno-Regular.woff2") format("woff2");
-    font-weight: 100 700;
-    font-display: swap;
-
-}
-
-@font-face {
-    font-family:"NobelUnoBold";
-    src: url("../../public/fonts/NobelUno-Bold.woff2") format("woff2");
-    font-weight: 100 700;
-    font-display: swap;
-
-}
-
-
-.font-Oliciy {
-    font-family: "Oliciy", sans-serif;
-}
-
-.font-NobelUno{
-    font-family: "NobelUno", sans-serif;
-}
-
-.font-NobelUnoBold {
-    font-family: "NobelUnoBold", sans-serif;
+    --font-sans: "Nobel Uno", sans-serif;
+    --font-brand: "Oliciy", sans-serif;
 }
