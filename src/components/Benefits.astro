@@ -1,76 +1,56 @@
 ---
-import Qr from '../assets/svg/qr.svg'
-import Notification from '../assets/svg/notification.svg'
-import Calendar from '../assets/svg/calendar.svg'
-import Setting from '../assets/svg/setting.svg'
-import Security from '../assets/svg/security.svg'
-import Family from '../assets/svg/family.svg'
+import { benefits } from "../utils/constains";
+import BenefitCard from "./BenefitCard.astro";
 ---
+
 <section>
-    <div class="m-14 ">
-        <h1 class="font-Oliciy text-5xl pb-9 text-[#F28705]">Beneficios</h1>
+  <div class="m-14">
+    <h1 class="font-Oliciy text-5xl pb-9 text-[#F28705]">Beneficios</h1>
 
+    <div class="flex flex-col gap-11">
+      {
+        benefits.map((benefit) => (
+          <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
+            <benefit.icon width={58} height={58} class="fill-primary" />
+          </BenefitCard>
+        ))
+      }
+
+      <!-- <div class="flex justify-start">
         <div>
-            <div class="flex justify-start m-4">
-                <div>
-                    <Qr width={60} height={60} class="fill-primary" />
-                </div>
-                <div class="ml-2">
-                    <h1 class="font-Oliciy text-2xl text-bold">Control por QR</h1>
-                    <h2 class="font-NobelUno text-2xl">Control por códigos QR únicos y autorizaciones verificadas.</h2>
-                </div>
-            </div>
-
-            <div class="flex justify-start m-4">
-                <div>
-                    <Notification width={40} height={40} fill="#F28705"/>
-                </div>
-                <div class="ml-2">
-                    <h1>Notificaciones en tiempo real</h1>
-                    <h2>Notificaciones instantáneas ante cualquier movimiento.</h2>
-                </div>
-            </div>
-
-            <div class="flex justify-start m-4">
-                <div>
-                    <Calendar width={40} height={40} fill="#F28705"/>
-                </div>
-                <div class="ml-2">
-                    <h1>Ahorro de tiempo y reducción de errores</h1>
-                    <h2>Optimiza el proceso de salida diaria.</h2>
-                </div>
-            </div>
-
-            <div class="flex justify-start m-4">
-                <div>
-                    <Setting width={40} height={40} fill="#F28705"/>
-                </div>
-                <div class="ml-2">
-                    <h1>Fácil implementación</h1>
-                    <h2>Integración  sin complicaciones ni pérdida de tiempo.</h2>
-                </div>
-            </div>
-
-            <div class="flex justify-start m-4">
-                <div>
-                    <Security width={40} height={40} fill="#F28705"/>
-                </div>
-                <div class="ml-2">
-                    <h1>Mayor seguridad</h1>
-                    <h2>Refuerza la seguridad escolar con procesos de salida totalmente verificados.</h2>
-                </div>
-            </div>
-
-            <div class="flex justify-start m-4">
-                <div>
-                    <Family width={40} height={40} fill="#F28705"/>
-                </div>
-                <div class="ml-2">
-                    <h1>Colaboración con padres</h1>
-                    <h2>Facilita la comunicación y cooperación entre padres y personal escolar.</h2>
-                </div>
-            </div>
-
+          <Setting width={40} height={40} fill="#F28705" />
         </div>
+        <div class="ml-2">
+          <h1>Fácil implementación</h1>
+          <h2>Integración sin complicaciones ni pérdida de tiempo.</h2>
+        </div>
+      </div>
+
+      <div class="flex justify-start">
+        <div>
+          <Security width={40} height={40} fill="#F28705" />
+        </div>
+        <div class="ml-2">
+          <h1>Mayor seguridad</h1>
+          <h2>
+            Refuerza la seguridad escolar con procesos de salida totalmente
+            verificados.
+          </h2>
+        </div>
+      </div>
+
+      <div class="flex justify-start">
+        <div>
+          <Family width={40} height={40} fill="#F28705" />
+        </div>
+        <div class="ml-2">
+          <h1>Colaboración con padres</h1>
+          <h2>
+            Facilita la comunicación y cooperación entre padres y personal
+            escolar.
+          </h2>
+        </div>
+      </div> -->
     </div>
+  </div>
 </section>
