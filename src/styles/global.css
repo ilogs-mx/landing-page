@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+    --color-primary: #F28705;
+}
+
 /* Carga de Fuentes para la Langing page: Oliciy, Aloevera y nobeluno */
 
 
