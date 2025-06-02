@@ -5,7 +5,7 @@ import Star from '../assets/svg/star.svg';
 const { name, message, estrella = 5} = Astro.props;
 ---
 
-<div >
+<div>
     <slot/>
   <div class="flex justify-start">
     {Array.from({ length: estrella }).map(() => (

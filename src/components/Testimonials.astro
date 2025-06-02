@@ -1,11 +1,26 @@
 ---
 import { testimonios } from "../utils/testimonio";
 import TestimonialsCard from "./TestimonialsCard.astro";
+import Title from "./Title.astro";
 ---
 
 <section>
-  <div>
-    <div class="w-full flex flex-col justify-center">
+  <div class="mb-15">
+    <Title title="Testimonios" />
+  </div>
+  <div class="flex gap-4">
+    <div class="w-full justify-items-center">
+      <iframe
+      width="710"
+      height="439"
+        src="https://www.youtube.com/embed/IpJn-rvYHA4?si=7kUMABVQyBhU6kUf"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+    <div class="w-full flex flex-col justify-center gap-6 mr-35">
       {
         testimonios.map((testimonios) => (
           <TestimonialsCard
