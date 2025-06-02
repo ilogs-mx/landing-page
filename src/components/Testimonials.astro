@@ -1,3 +1,20 @@
 ---
-
+import { testimonios } from "../utils/testimonio";
+import TestimonialsCard from "./TestimonialsCard.astro";
 ---
+
+<section>
+  <div>
+    <div class="w-full flex flex-col justify-center">
+      {
+        testimonios.map((testimonios) => (
+          <TestimonialsCard
+            name={testimonios.name}
+            message={testimonios.message}
+            estrellas={testimonios.estrellas}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
