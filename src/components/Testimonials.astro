@@ -5,22 +5,21 @@ import Title from "./Title.astro";
 ---
 
 <section>
-  <div class="mb-15">
+  <div class="mb-6 :mb-15">
     <Title title="Testimonios" />
   </div>
-  <div class="flex gap-4">
+  <div class="md:flex gap-4">
     <div class="w-full justify-items-center">
       <iframe
-      width="710"
-      height="439"
         src="https://www.youtube.com/embed/IpJn-rvYHA4?si=7kUMABVQyBhU6kUf"
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
+        allowfullscreen
+        class="w-80 h-50 md:w-[710px] md:h-[439px]"></iframe>
     </div>
-    <div class="w-full flex flex-col justify-center gap-6 mr-35">
+    <div class="w-full flex flex-col justify-center gap-6 px-15 pt-6 md:pt-0 md:px-30">
       {
         testimonios.map((testimonios) => (
           <TestimonialsCard
