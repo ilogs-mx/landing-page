@@ -16,6 +16,8 @@
 @theme inline {
     --color-primary: #F28705;
     --color-secondary: #F27405;
+    --color-dark: #262626;
+    --color-light: #f2f2f2;
 
 
     --color-background: var(--background);
