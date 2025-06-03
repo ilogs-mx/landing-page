@@ -8,11 +8,11 @@ type Props = {
 const { title, subtitle } = Astro.props;
 ---
 
-<div class="flex justify-start gap-2">
+<div class="flex justify-start gap-2 px-9">
   <slot />
   <div>
-    <h1 class="text-xl text-bold font-brand">{title}</h1>
-    <h2 class="text-xl">
+    <h1 class=" text-xs md:text-xl text-bold font-brand">{title}</h1>
+    <h2 class=" text-xs md:text-xl">
       {subtitle}
     </h2>
   </div>
