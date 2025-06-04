@@ -4,12 +4,12 @@ import Email from "../assets/svg/email.svg";
 import Facebook from "../assets/svg/facebook.svg";
 ---
 
-<nav class="mx-auto flex justify-between bg-[#F27405] px-8">
-  <img src="/src/image/logo.webp" alt="Ilogs" class="w-auto h-[80px]" />
+<nav class="fixed flex justify-between bg-secondary px-8 z-50 w-full h-16">
+  <img src="/src/image/logo.webp" alt="Ilogs" class="w-auto md:h-[80px]" />
 
   <div class="flex flex-row p-3 gap-3">
-    <a href=""> <Email width={40} height={40} fill="#f2f2f2" /> </a>
-    <a href=""> <Facebook width={40} height={40} fill="#f2f2f2" /> </a>
-    <a href=""> <Instagram width={40} height={40} fill="#f2f2f2" /> </a>
+    <a href="" class="w-6 h-6 md:w-10 md:h-10 fill-light"> <Email /> </a>
+    <a href="" class="w-6 h-6 md:w-10 md:h-10 fill-light"> <Facebook /> </a>
+    <a href="" class="w-6 h-6 md:w-10 md:h-10 fill-light"> <Instagram /> </a>
   </div>
 </nav>
