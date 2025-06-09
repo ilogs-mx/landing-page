@@ -8,8 +8,29 @@ import Facebook from "../assets/svg/facebook.svg";
   <img src="/src/image/logo.webp" alt="Ilogs" class="w-auto md:h-[80px]" />
 
   <div class="flex flex-row p-3 gap-3">
-    <a href="" class="w-6 h-6 md:w-10 md:h-10 fill-light"> <Email /> </a>
-    <a href="" class="w-6 h-6 md:w-10 md:h-10 fill-light"> <Facebook /> </a>
-    <a href="" class="w-6 h-6 md:w-10 md:h-10 fill-light"> <Instagram /> </a>
+    <a href="" class="box w-6 h-6 md:w-10 md:h-10 fill-light"> <Email /> </a>
+    <a href="" class="box w-6 h-6 md:w-10 md:h-10 fill-light"> <Facebook /> </a>
+    <a href="" class="box w-6 h-6 md:w-10 md:h-10 fill-light">
+      <Instagram />
+    </a>
   </div>
 </nav>
+<script type="module">
+  import {
+    animate,
+    hover,
+     press,
+  } from "https://cdn.jsdelivr.net/npm/motion@12.16.0/+esm";
+
+  hover(".box", (element) => {
+    animate(element, { scale: 1.15 });
+
+    return () => animate(element, { scale: 1 });
+  });
+  press(".box", (element) => {
+    animate(element, { scale: 0.8 }, { type: "spring", stiffness: 1000 });
+
+    return () =>
+      animate(element, { scale: 1 }, { type: "spring", stiffness: 500 });
+  });
+</script>

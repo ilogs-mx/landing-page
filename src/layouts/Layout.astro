@@ -23,7 +23,10 @@ import Footer from "../components/Footer.astro";
       import {
         animate,
         inView,
+        press,
       } from "https://cdn.jsdelivr.net/npm/motion@12.16.0/+esm";
+
+      //Animacion scroll
 
       inView(".scroll-section", (element) => {
         animate(
@@ -34,9 +37,16 @@ import Footer from "../components/Footer.astro";
             easing: [0.17, 0.55, 0.55, 1],
           }
         );
+        //Animacion presionar boton contactanos
 
         return () => animate(element, { opacity: 0, x: -100 });
       });
+       press(".button", (element) => {
+        animate(element, { scale: 0.8 }, { type: "spring", stiffness: 1000 })
+
+        return () =>
+            animate(element, { scale: 1 }, { type: "spring", stiffness: 500 })
+    })
     </script>
   </body>
 </html>
