@@ -4,8 +4,8 @@ import BenefitCard from "./BenefitCard.astro";
 import Title from "./Title.astro";
 ---
 
-<section class="scroll-section p-5 md:p-20">
-  <div class="mt-10 mb-6 md:mt-20">
+<section class="benefits p-5 md:p-20">
+  <div class="benefits-card mt-10 mb-6 md:mt-20">
     <Title title="Beneficios" />
   </div>
   <div class="flex flex-col md:flex-row gap-4">
@@ -14,9 +14,11 @@ import Title from "./Title.astro";
     >
       {
         benefits.map((benefit) => (
-          <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
-            <benefit.icon class="fill-primary w-6 h-6 md:w-15 md:h-15" />
-          </BenefitCard>
+          <div class="benefits-card">
+            <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
+              <benefit.icon class="fill-primary w-6 h-6 md:w-15 md:h-15" />
+            </BenefitCard>
+          </div>
         ))
       }
     </div>
@@ -24,8 +26,37 @@ import Title from "./Title.astro";
       <img
         src="image/MOKCUP-INICIO.webp"
         alt=""
-        class="w-65 h-70 md:w-2xl md:h-[690px]"
+        class="benefits-image w-65 h-70 md:w-2xl md:h-[690px]"
       />
     </div>
   </div>
 </section>
+<script>
+  import { gsap } from "gsap";
+
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".benefits-card", {
+    opacity: 0,
+    x: -100,
+    duration: 2,
+    stagger: 0.2,
+    scrollTrigger: {
+      trigger: ".benefits",
+      start: "top 80%",
+      toggleActions: "play reset play reset",
+    },
+  });
+  gsap.from(".benefits-image", {
+    x: 150,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: ".benefits",
+      start: "top 80%",
+      toggleActions: "play reset play reset",
+    },
+  });
+</script>

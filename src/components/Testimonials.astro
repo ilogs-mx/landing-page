@@ -4,12 +4,12 @@ import TestimonialsCard from "./TestimonialsCard.astro";
 import Title from "./Title.astro";
 ---
 
-<section class="scroll-section p-5 md:p-20">
-  <div class="mb-6 :mb-15">
+<section class="section-testimonials p-5 md:p-20">
+  <div class="testimonials mb-6 :mb-15">
     <Title title="Testimonios" />
   </div>
   <div class="md:flex gap-4">
-    <div class="w-full justify-items-center">
+    <div class="testimonials w-full justify-items-center">
       <iframe
         src="https://www.youtube.com/embed/IpJn-rvYHA4?si=7kUMABVQyBhU6kUf"
         title="YouTube video player"
@@ -24,13 +24,33 @@ import Title from "./Title.astro";
     >
       {
         testimonios.map((testimonios) => (
+          <div class="testimonials">
           <TestimonialsCard
             name={testimonios.name}
             message={testimonios.message}
             estrellas={testimonios.estrellas}
           />
+            </div>
         ))
       }
     </div>
   </div>
 </section>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".testimonials",{
+    opacity:0,
+    y:100,
+    stagger:0.25,
+    duration:1,
+     scrollTrigger: {
+      trigger: ".section-testimonials",
+      start: "top 80%",
+      toggleActions: "play reset play reset",
+    },
+  })
+</script>
