@@ -2,22 +2,36 @@
 import { testimonios } from "../utils/testimonio";
 import TestimonialsCard from "./TestimonialsCard.astro";
 import Title from "./Title.astro";
+import Play from "../assets/svg/play.svg";
+
+const videoId = "IpJn-rvYHA4";
+const title = "Presentación de iLogs";
+const thumbnail = "/image/frontmatterilogs.webp";
 ---
 
-<section class="section-testimonials p-5 md:p-20">
+<section class=" p-5 md:p-20">
+  <div class="section-testimonials">
   <div class="testimonials mb-6 :mb-15">
     <Title title="Testimonios" />
   </div>
   <div class="md:flex gap-4">
-    <div class="testimonials w-full justify-items-center">
-      <iframe
-        src="https://www.youtube.com/embed/IpJn-rvYHA4?si=7kUMABVQyBhU6kUf"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-        class="w-80 h-50 md:w-[710px] md:h-[439px]"></iframe>
+    <div
+      class="testimonials w-full justify-items-center aspect-video bg-black rounded-xl overflow-hidden"
+      onclick={`this.outerHTML = '<iframe class="w-3xs md:w-full h-37 md:h-[439px] rounded-xl" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
+    >
+      <img
+        src={thumbnail}
+        alt={`Vista previa de ${title}`}
+        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div
+          class="w-35 h-35 bg-center bg-no-repeat bg-contain fill-secondary opacity-45 cursor-pointer group hover:scale-115 duration-500"
+        >
+          <Play />
+        </div>
+      </div>
     </div>
     <div
       class="w-full flex flex-col justify-center gap-6 px-15 pt-6 md:pt-0 md:px-30"
@@ -25,16 +39,17 @@ import Title from "./Title.astro";
       {
         testimonios.map((testimonios) => (
           <div class="testimonials">
-          <TestimonialsCard
-            name={testimonios.name}
-            message={testimonios.message}
-            estrellas={testimonios.estrellas}
-          />
-            </div>
+            <TestimonialsCard
+              name={testimonios.name}
+              message={testimonios.message}
+              estrellas={testimonios.estrellas}
+            />
+          </div>
         ))
       }
     </div>
   </div>
+    </div>
 </section>
 <script>
   import { gsap } from "gsap";
@@ -42,15 +57,15 @@ import Title from "./Title.astro";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from(".testimonials",{
-    opacity:0,
-    y:100,
-    stagger:0.25,
-    duration:1,
-     scrollTrigger: {
+  gsap.from(".testimonials", {
+    opacity: 0,
+    y: 100,
+    stagger: 0.25,
+    duration: 1,
+    scrollTrigger: {
       trigger: ".section-testimonials",
-      start: "top 80%",
+      start: "top 50%",
       toggleActions: "play reset play reset",
     },
-  })
+  });
 </script>
