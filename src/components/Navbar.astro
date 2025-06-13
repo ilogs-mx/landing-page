@@ -4,33 +4,27 @@ import Email from "../assets/svg/email.svg";
 import Facebook from "../assets/svg/facebook.svg";
 ---
 
-<nav class="fixed flex justify-between bg-secondary px-8 z-50 w-full h-16">
-  <img src="/src/image/logo.webp" alt="Ilogs" class="w-auto md:h-[80px]" />
+<nav
+  class="fixed flex justify-between bg-secondary px-8 z-50 w-full h-16 items-center"
+>
+  <img src="image/logo.webp" alt="Ilogs" class="icon w-12 h-12 md:w-20 md:h-20" />
 
   <div class="flex flex-row p-3 gap-3">
-    <a href="" class="box w-6 h-6 md:w-10 md:h-10 fill-light"> <Email /> </a>
-    <a href="" class="box w-6 h-6 md:w-10 md:h-10 fill-light"> <Facebook /> </a>
-    <a href="" class="box w-6 h-6 md:w-10 md:h-10 fill-light">
+    <a href="" class="icon w-6 h-6 md:w-10 md:h-10 fill-light"> <Email /> </a>
+    <a href="" class="icon w-6 h-6 md:w-10 md:h-10 fill-light">
+      <Facebook />
+    </a>
+    <a href="" class="icon w-6 h-6 md:w-10 md:h-10 fill-light">
       <Instagram />
     </a>
   </div>
 </nav>
-<script type="module">
-  import {
-    animate,
-    hover,
-     press,
-  } from "https://cdn.jsdelivr.net/npm/motion@12.16.0/+esm";
+<script>
+  import { gsap } from "gsap";
 
-  hover(".box", (element) => {
-    animate(element, { scale: 1.15 });
-
-    return () => animate(element, { scale: 1 });
-  });
-  press(".box", (element) => {
-    animate(element, { scale: 0.8 }, { type: "spring", stiffness: 1000 });
-
-    return () =>
-      animate(element, { scale: 1 }, { type: "spring", stiffness: 500 });
+  gsap.from(".icon", {
+    y: -100,
+    stagger: 0.25,
+    duration:1,
   });
 </script>

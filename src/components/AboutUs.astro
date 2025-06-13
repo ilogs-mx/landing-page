@@ -2,15 +2,15 @@
 import Title from "./Title.astro";
 ---
 
-<section class="scroll-section mt-10">
+<section class="about p-5 pt-35 md:pt-20 md:p-20">
   <div
-    class="mx-10 md:mx-24 text-center rounded-3xl p-10 md:p-20 shadow-lg shadow-primary border-2 border-primary"
+    class="about-box mx-10 md:mx-24 text-center rounded-3xl p-10 md:p-20 shadow-lg shadow-primary border-2 border-primary"
   >
-    <div class="mb-3 md:mb-9">
+    <div class="about-title mb-3 md:mb-10 overflow-hidden">
       <Title title="¿Qué somos?" />
     </div>
 
-    <p class="text-xs md:text-3xl">
+    <p class="about-text text-xs md:text-3xl">
       Somos la solución líder en el control de salidas escolares diseñada para
       que las escuelas puedan ofrecer un entorno más seguro, organizado y
       eficiente. Nuestra plataforma facilita el registro, autorización y
@@ -19,3 +19,52 @@ import Title from "./Title.astro";
     </p>
   </div>
 </section>
+<script>
+  import { gsap } from "gsap";
+  import { SplitText } from "gsap/SplitText";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(SplitText);
+  gsap.registerPlugin(ScrollTrigger);
+
+  let split = SplitText.create(".about-text", {
+    type: "lines",
+  });
+
+  gsap.from(".about-title", {
+    opacity: 0,
+    x: -100,
+    duration: 1,
+    delay: 0.25,
+    scrollTrigger: {
+      trigger: ".about",
+      start: "top 80%",
+      toggleActions: "play reset play reset",
+    },
+  });
+
+  gsap.from(".about-box", {
+    opacity: 0,
+    x: -100,
+    duration: 1,
+    delay: 0.25,
+    scrollTrigger: {
+      trigger: ".about",
+      start: "top 60%",
+      toggleActions: "play reset play reset",
+    },
+  });
+
+  gsap.from(split.lines, {
+    opacity: 0,
+    x: -100,
+    delay: 0.25,
+    duration: 1,
+    stagger: 0.25,
+    scrollTrigger: {
+      trigger: ".about",
+      start: "top 80%",
+      toggleActions: "play reset play reset",
+    },
+  });
+</script>

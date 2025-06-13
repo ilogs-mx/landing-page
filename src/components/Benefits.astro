@@ -4,28 +4,61 @@ import BenefitCard from "./BenefitCard.astro";
 import Title from "./Title.astro";
 ---
 
-<section class="scroll-section opacity-0">
-  <div class="mt-10 mb-6 md:mt-20">
-    <Title title="Beneficios" />
-  </div>
-  <div class="flex flex-col md:flex-row gap-4">
-    <div
-      class="w-full flex flex-col justify-center gap-5 md:gap-11 px-10 order-1 md:order-2"
-    >
-      {
-        benefits.map((benefit) => (
-          <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
-            <benefit.icon class="fill-primary w-6 h-6 md:w-15 md:h-15" />
-          </BenefitCard>
-        ))
-      }
+<section class="p-5 md:p-20">
+  <div class="benefits">
+    <div class="benefits-card mt-10 mb-6 md:mt-20">
+      <Title title="Beneficios" />
     </div>
-    <div class="w-full justify-items-center order-2 md:order-1">
-      <img
-        src="/src/image/MOKCUP-INICIO.webp"
-        alt=""
-        class="w-65 h-70 md:w-2xl md:h-[690px]"
-      />
+    <div class="flex flex-col md:flex-row gap-4">
+      <div
+        class="w-full flex flex-col justify-center gap-5 md:gap-11 px-10 order-1 md:order-2"
+      >
+        {
+          benefits.map((benefit) => (
+            <div class="benefits-card">
+              <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
+                <benefit.icon class="fill-primary w-6 h-6 md:w-15 md:h-15" />
+              </BenefitCard>
+            </div>
+          ))
+        }
+      </div>
+      <div class="w-full justify-items-center order-2 md:order-1">
+        <img
+          src="image/MOKCUP-INICIO.webp"
+          alt=""
+          class="benefits-image w-65 h-70 md:w-2xl md:h-[690px]"
+        />
+      </div>
     </div>
   </div>
 </section>
+<script>
+  import { gsap } from "gsap";
+
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".benefits-card", {
+    opacity: 0,
+    x: -100,
+    duration: 2,
+    stagger: 0.2,
+    scrollTrigger: {
+      trigger: ".benefits",
+      start: "top 60%",
+      toggleActions: "play reset play reset",
+    },
+  });
+  gsap.from(".benefits-image", {
+    x: 70,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: ".benefits",
+      start: "top 60%",
+      toggleActions: "play reset play reset",
+    },
+  });
+</script>
