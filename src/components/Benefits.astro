@@ -17,7 +17,7 @@ import Title from "./Title.astro";
           benefits.map((benefit) => (
             <div class="benefits-card">
               <BenefitCard title={benefit.title} subtitle={benefit.subtitle}>
-                <benefit.icon class="fill-primary w-6 h-6 md:w-15 md:h-15" />
+                <benefit.icon class="fill-primary w-10 h-10 sm:w-15 sm:h-15" />
               </BenefitCard>
             </div>
           ))
@@ -42,7 +42,7 @@ import Title from "./Title.astro";
 
   gsap.from(".benefits-card", {
     opacity: 0,
-    x: -100,
+    x: -40,
     duration: 2,
     stagger: 0.2,
     scrollTrigger: {
@@ -51,7 +51,7 @@ import Title from "./Title.astro";
     },
   });
   gsap.from(".benefits-image", {
-    x: 70,
+    x: 40,
     opacity: 0,
     duration: 1,
     scrollTrigger: {

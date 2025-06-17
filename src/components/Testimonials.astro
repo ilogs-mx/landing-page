@@ -9,15 +9,15 @@ const title = "Presentación de iLogs";
 const thumbnail = "/image/frontmatterilogs.webp";
 ---
 
-<section class=" p-5 md:p-20">
+<section class=" p-5 sm:p-20">
   <div class="section-testimonials">
-  <div class="testimonials mb-6 :mb-15">
+  <div class="testimonials mb-6 sm:mb-15">
     <Title title="Testimonios" />
   </div>
-  <div class="md:flex gap-4">
+  <div class="sm:flex gap-4">
     <div
       class="testimonials w-full justify-items-center aspect-video bg-black rounded-xl overflow-hidden"
-      onclick={`this.outerHTML = '<iframe class="w-3xs md:w-full h-37 md:h-[439px] rounded-xl" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
+      onclick={`this.outerHTML = '<iframe class="items-center w-3xs sm:w-full h-37 sm:h-[439px] rounded-xl" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
     >
       <img
         src={thumbnail}
@@ -34,7 +34,7 @@ const thumbnail = "/image/frontmatterilogs.webp";
       </div>
     </div>
     <div
-      class="w-full flex flex-col justify-center gap-6 px-15 pt-6 md:pt-0 md:px-30"
+      class="w-full flex flex-col justify-center gap-6 px-10 pt-6 sm:pt-0 sm:px-30"
     >
       {
         testimonios.map((testimonios) => (
