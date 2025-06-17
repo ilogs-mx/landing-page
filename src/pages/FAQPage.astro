@@ -1,0 +1,20 @@
+---
+import Layout from "../layouts/Layout.astro"
+import { faqs } from "../utils/faqs";
+import FAQCard from "../components/FAQCard.astro";
+import Title from "../components/Title.astro";
+---
+
+<Layout title="Preguntas-Frecuentes">
+<section class="w-screen h-screen pt-20">
+    <Title title="Preguntas Frecuentes"/>
+    <div class="columns-2 gap-4 px-4 space-y-4">
+    {
+        faqs.map((faqs) => (
+        <FAQCard question={faqs.question} answer={faqs.answer} number={faqs.number}>
+        </FAQCard>
+        ))
+    }
+     </div>
+</section>
+</Layout>
