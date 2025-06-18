@@ -12,8 +12,8 @@ export const faqs = [
     number : "2",
   },
   {
-    question: "¿Cómo opera iLogs desde el perfil del padre o tutor?",
-    answer: "El padre o tutor debe seleccionar al alumno que será recogido desde la aplicación, lo cual genera un código QR único. Este código debe ser presentado al personal escolar al momento de la entrega.",
+    question: "¿Cómo funciona iLogs desde el perfil del tutor?",
+    answer: "El tutor debe seleccionar al alumno que será recogido desde la aplicación, lo cual genera un código QR único. Este código debe ser presentado al personal escolar al momento de la entrega.",
     number : "3",
   },
   {
@@ -22,18 +22,18 @@ export const faqs = [
     number : "4",
   },
   {
-    question: "¿Qué tipo de información se muestra al personal escolar al escanear un código QR?",
+    question: "¿Qué tipo de información se muestra al personal escolar?",
     answer: " El personal autorizado visualizará los datos esenciales del alumno, como su nombre, grupo y salón de clases, permitiendo así una localización rápida y una entrega segura.",
     number : "5",
   },
   {
-    question: "¿Es necesario contar con conexión a internet para utilizar iLogs?",
+    question: "¿Necesito contar con conexión a internet para utilizar iLogs?",
     answer: "No. Una de las ventajas de iLogs es que funciona sin necesidad de conexión a internet, lo que permite su uso eficiente incluso en entornos con conectividad limitada.",
     number : "6",
   },
   {
-    question: "¿En qué dispositivos se encuentra disponible iLogs?",
-    answer: "La aplicación está disponible de forma gratuita para su descarga en dispositivos móviles con sistema operativo iOS (App Store) y Android (Google Play Store",
+    question: "¿En qué sistemas se encuentra disponible iLogs?",
+    answer: "La aplicación está disponible de forma gratuita para su descarga en dispositivos móviles con sistema operativo iOS (App Store) y Android (Google Play Store)",
     number : "7",
   },
   {

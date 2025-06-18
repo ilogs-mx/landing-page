@@ -7,17 +7,20 @@ type Props = {
 
 const { question, answer, number } = Astro.props;
 ---
-
-<div class="flex justify-start justify-items-center gap-2 rounded-2xl  p-3 drop-shadow-xl/50 shadow-xl/30 ">
-  <div class="bg-secondary rounded-4xl w-10 h-10 flex items-center justify-center">
-    <h1 class="font-bold text-xl font-brand">{number}</h1>
+<div class="flex justify-center mx-8 mb-5">
+<div
+  class="flex justify-start items-center gap-5 rounded-2xl p-3 drop-shadow-xl/50 shadow-xl/30  sm:w-2xl"
+>
+  <div class="bg-secondary w-18 max-h-min sm:w-12 sm:h-auto rounded-full flex items-center justify-center">
+      <h1 class="font-bold text-base sm:text-lg">{number}</h1>
   </div>
   <div class="">
-    <div class="border-b-1 border-primary">
-    <h1 class="font-brand text-xl">{question}</h1>
-     </div>
-     <div>
-    <p class="text-xl">{answer}</p>
+    <div class="border-b-1 border-primary mb-2">
+      <h1 class="font-brand text-xs sm:text-xl">{question}</h1>
+    </div>
+    <div>
+      <p class="text-xs sm:text-xl">{answer}</p>
     </div>
   </div>
+</div>
 </div>
