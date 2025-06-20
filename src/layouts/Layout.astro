@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import WhatsappWidget from "../components/whatsappWidget.astro";
 
 const {title} = Astro.props;
 
@@ -23,7 +24,8 @@ interface Props {
     <meta property="og:url" content="https://descubre.ilogs.com.mx/" />
     <meta property="og:image" content="/image/BannerOG.webp"/>
   </head>
-  <body class="bg-background text-foreground font-sans relative overflow-x-hidden pb-15 sm:pb-30">
+  <body class="bg-background text-foreground font-sans relative overflow-x-hidden pb-30 sm:pb-30">
+    <WhatsappWidget/>
     <Navbar />
     <main>
       <slot />
