@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { faqs } from "../utils/faqs";
+import FAQCard from "../components/FAQCard.astro";
+import Title from "../components/Title.astro";
+import Arrowleft from "../assets/svg/arrowleft.svg";
+---
+
+<Layout title="Preguntas-Frecuentes">
+  <section class="w-auto h-full sm:w-full sm:h-full pt-20 sm:mb-10">
+    <div class="faq-page relative  flex items-center justify-center mb-4 sm:mb-10">
+      <a href="/" class="absolute left-4 fill-primary hover:fill-secondary"
+        ><Arrowleft class="w-8 h-8 sm:w-12 sm:h-12" /></a
+      >
+      <Title title="Preguntas Frecuentes" />
+    </div>
+    <div class="faq-page  lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-10 lg:px-4">
+      {
+        faqs.map((faq) => (
+          <FAQCard
+            question={faq.question}
+            answer={faq.answer}
+            number={faq.number}
+          />
+        ))
+      }
+    </div>
+  </section>
+  <script>
+    import { gsap } from "gsap";
+
+
+    gsap.from(".faq-page", {
+      opacity: 0,
+      y: 100,
+      stagger: 0.25,
+      duration: 1,
+      delay: 0.3,
+    });
+  </script>
+</Layout>

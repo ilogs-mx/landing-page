@@ -2,6 +2,13 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import WhatsappWidget from "../components/whatsappWidget.astro";
+
+const { title } = Astro.props;
+
+interface Props {
+  title: string;
+}
 ---
 
 <!doctype html>
@@ -11,42 +18,35 @@ import Footer from "../components/Footer.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Ilogs</title>
+    <title>{title}</title>
+    <meta property="og:title" content="iLogs" />
+    <meta
+      property="og:description"
+      content="iLogs Seguridad & Orden en cada Salida Escolar"
+    />
+    <meta property="og:url" content="https://descubre.ilogs.com.mx/" />
+    <meta property="og:image" content="/image/BannerOG.webp" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="iLogs" />
+    <meta
+      name="twitter:description"
+      content="iLogs Seguridad & Orden en cada Salida Escolar"
+    />
+    <meta
+      name="twitter:image"
+      content="https://descubre.ilogs.com.mx/image/BannerOG.webp"
+    />
+    <meta name="twitter:url" content="https://descubre.ilogs.com.mx/" />
   </head>
-  <body class="bg-background text-foreground font-sans absolute">
+  <body
+    class="bg-background text-foreground font-sans relative overflow-x-hidden pb-30 sm:pb-30"
+  >
+    <WhatsappWidget />
     <Navbar />
     <main>
       <slot />
     </main>
     <Footer />
-    <script type="module">
-      import {
-        animate,
-        inView,
-        press,
-      } from "https://cdn.jsdelivr.net/npm/motion@12.16.0/+esm";
-
-      //Animacion scroll
-
-      inView(".scroll-section", (element) => {
-        animate(
-          element,
-          { opacity: 1, x: [-100, 0] },
-          {
-            duration: 0.9,
-            easing: [0.17, 0.55, 0.55, 1],
-          }
-        );
-        //Animacion presionar boton contactanos
-
-        return () => animate(element, { opacity: 0, x: -100 });
-      });
-       press(".button", (element) => {
-        animate(element, { scale: 0.8 }, { type: "spring", stiffness: 1000 })
-
-        return () =>
-            animate(element, { scale: 1 }, { type: "spring", stiffness: 500 })
-    })
-    </script>
   </body>
 </html>
