@@ -8,7 +8,7 @@
   >
     <div class="hero flex flex-col lg:flex-row content-center justify-center">
       <div
-        class="w-full flex flex-col items-center text-center justify-center mt-25 lg:mt-80"
+        class="w-full flex flex-col items-center text-center justify-center mt-25 lg:mt-60"
       >
         <h1 class="hero-text font-brand text-base lg:text-4xl text-light">
           SOLUCIÓN SEGURA Y<br />
@@ -25,7 +25,7 @@
         <img
           src="image/MOCKUP-LOGIN.webp"
           alt="Mockup"
-          class="hero-image w-88 md:w-96 md:h-1/2 lg:w-7xl lg:h-11/12 absolute  z-15 top-55 md:top-80 lg:top-10  left-15 md:left-60 lg:left-5/12"
+          class="hero-image w-80 md:w-96 md:h-1/2 lg:w-7xl lg:h-11/12 absolute  z-15 top-55 md:top-80 lg:top-10  left-7 md:left-60 lg:left-5/12"
         />
       </div>
     </div>
@@ -57,29 +57,18 @@
     y: 30,
     autoAlpha: 0,
     stagger: 0.01,
-    ease: "back.out",
     scrollTrigger: {
       trigger: ".hero",
       start: "top 80%",
     },
   });
 
-  gsap.from(".hero-button", {
-    opacity: 0,
-    y: 150,
-    ease: "power4.out",
-    duration: 2,
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top 80%",
-    },
-  });
 
   gsap.from(".hero-image", {
     y: 150,
     opacity: 0,
     ease: "power4.out",
-    duration: 2,
+    duration: 0.5,
     scrollTrigger: {
       trigger: ".hero",
       start: "top 80%",
