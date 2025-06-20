@@ -1,20 +1,46 @@
 ---
 import Instagram from "../assets/svg/instagram.svg";
-import Email from "../assets/svg/email.svg";
 import Facebook from "../assets/svg/facebook.svg";
+import Tiktok from "../assets/svg/tiktok.svg";
+import Linkedin from "../assets/svg/linkedin.svg";
 ---
 
 <nav
   class="fixed top-0 flex justify-between bg-secondary px-8 z-50 w-full h-16 items-center"
 >
-  <img src="/image/logo.webp" alt="Ilogs" class="icon w-12 h-12 md:w-20 md:h-20" />
+  <img
+    src="/image/logo.webp"
+    alt="Ilogs"
+    class="icon w-12 h-12 md:w-20 md:h-20"
+  />
 
-  <div class="flex flex-row p-3 gap-3">
-    <a href="" class="icon w-6 h-6 md:w-10 md:h-10 fill-light"> <Email /> </a>
-    <a href="" class="icon w-6 h-6 md:w-10 md:h-10 fill-light">
+  <div class="flex flex-row p-3 gap-3 items-center">
+    <a
+      href="https://www.linkedin.com/company/ilogs-plataforma/"
+      class="icon w-6 h-6 md:w-10 md:h-10 fill-light justify-center"
+      target="_blank"
+    >
+      <Linkedin/>
+    </a>
+    <a
+      href="https://www.tiktok.com/@ilogs_mx"
+      class="icon w-5 h-5 md:w-7 md:h-7 fill-light"
+      target="_blank"
+    >
+      <Tiktok />
+    </a>
+    <a
+      href="https://www.facebook.com/ilogsmx"
+      class="icon w-6 h-6 md:w-10 md:h-10 fill-light"
+      target="_blank"
+    >
       <Facebook />
     </a>
-    <a href="" class="icon w-6 h-6 md:w-10 md:h-10 fill-light">
+    <a
+      href="https://www.instagram.com/ilogs_oficial/"
+      class="icon w-6 h-6 md:w-10 md:h-10 fill-light"
+      target="_blank"
+    >
       <Instagram />
     </a>
   </div>
@@ -25,6 +51,6 @@ import Facebook from "../assets/svg/facebook.svg";
   gsap.from(".icon", {
     y: -100,
     stagger: 0.25,
-    duration:1,
+    duration: 1,
   });
 </script>
