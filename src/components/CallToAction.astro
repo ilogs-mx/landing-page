@@ -1,62 +1,283 @@
 ---
-
+import Title from "./Title.astro";
+import Airplane from "../assets/svg/airplane.svg";
+import Backpack from "../assets/svg/backpack.svg";
+import Book from "../assets/svg/book.svg";
 ---
 
-<section class="callTo my-15 bg-primary py-8 flex content-center">
-  <div class="w-full h-full">
-    <div
-      class="bg-[url(/image/bg-call2.webp)] lg:bg-[url(/image/bg-CallToAction.webp)] h-30 md:h-auto bg-no-repeat bg-contain bg-center md:bg-size-[550px]  lg:bg-contain"
-    >
-      <div class="px-10 lg:p-25">
-        <p
-          class="callTo-text content-center  text-xs md:text-lg lg:text-3xl text-center mb-4 lg:mb-10 text-light"
-        >
-          Somos un equipo comprometido de profesionales <br />
-          dedicados a mejorar la experiencia escolar y a <br />
-          proporcionar herramientas efectivas para el control <br /> de salidas estudiantiles.
-        </p>
-      </div>
+<section class="my-16 py-16 sm:py-8 p-5 md:p-20 bg-primary relative">
+  <Title title="Contactanos" class="text-light mb-8 fade-in" />
+
+  <form
+    class="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 relative z-20 mb-8 fade-in"
+    id="contactForm"
+  >
+    <!-- Name field -->
+    <div>
+      <label for="fName" class="block text-base font-medium text-light mb-2">
+        Nombre completo
+      </label>
+      <input
+        required
+        type="text"
+        name="fName"
+        id="fName"
+        placeholder="Ej. Juan Perez"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      />
     </div>
-  </div>
+    <!-- Phone field -->
+    <div>
+      <label for="fPhone" class="block text-base font-medium text-light mb-2">
+        Número de teléfono
+      </label>
+      <input
+        required
+        type="tel"
+        name="fPhone"
+        id="fPhone"
+        placeholder="Ej. 123 456 7890"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      />
+    </div>
+    <!-- Email field -->
+    <div>
+      <label for="fMail" class="block text-base font-medium text-light mb-2">
+        Correo electrónico
+      </label>
+      <input
+        type="email"
+        name="fMail"
+        id="fMail"
+        placeholder="Ej. ejemplo@dominio.com"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      />
+    </div>
+    <!-- School field -->
+    <div>
+      <label for="fSchool" class="block text-base font-medium text-light mb-2">
+        Nombre de la escuela/institución
+      </label>
+      <input
+        required
+        type="text"
+        name="fSchool"
+        id="fSchool"
+        placeholder="Ej. Escuela Secundaria ABC"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      />
+    </div>
+    <!-- Role field -->
+    <div>
+      <label for="fRole" class="block text-base font-medium text-light mb-2">
+        ¿Cuál es tu rol?
+      </label>
+      <select
+        required
+        name="fRole"
+        id="fRole"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      >
+        <option value="" selected disabled hidden>Selecciona aquí</option>
+
+        <option value="Padre/Madre/Tutor">Padre / Madre / Tutor</option>
+        <option value="Director(a)">Director(a)</option>
+        <option value="Coordinador(a)">Coordinador(a)</option>
+        <option value="Personal administrativo">Personal administrativo</option>
+      </select>
+    </div>
+    <!-- Students field -->
+    <div>
+      <label
+        for="fStudents"
+        class="block text-base font-medium text-light mb-2"
+      >
+        ¿Con cuántos alumnos cuenta?
+      </label>
+      <select
+        required
+        name="fStudents"
+        id="fStudents"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      >
+        <option value="" selected disabled hidden>Selecciona aquí</option>
+
+        <option value="Menos de 100">Menos de 100</option>
+        <option value="100 – 300">100 – 300</option>
+        <option value="Más de 300">Más de 300</option>
+        <option value="No aplica / No sé">No aplica / No sé</option>
+      </select>
+    </div>
+    <!-- Email field -->
+    <div class="col-span-1 md:col-span-2">
+      <fieldset>
+        <legend class="block text-base font-medium text-light mb-2">
+          ¿Qué te gustaría mejorar con iLogs?
+        </legend>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="flex items-center gap-1">
+            <input
+              type="checkbox"
+              id="security"
+              name="fSecurity"
+              value="Seguridad en salidas escolares"
+              class="h-5 w-5 border border-light rounded-md bg-light accent-light"
+            />
+            <label for="security">Seguridad en salidas escolares</label>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <input
+              type="checkbox"
+              id="digitalization"
+              name="fDigitalization"
+              value="Digitalizar el proceso de salida"
+              class="h-5 w-5 border border-light rounded-md bg-light accent-light"
+            />
+            <label for="digitalization">Digitalizar el proceso de salida</label>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <input
+              type="checkbox"
+              id="monitoring"
+              name="fMonitoring"
+              value="Gestión de permisos para salidas o eventos"
+              class="h-5 w-5 border border-light rounded-md bg-light accent-light"
+            />
+            <label for="monitoring">Permisos para salidas</label>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <input
+              type="checkbox"
+              id="efficiency"
+              name="fEfficiency"
+              value="Agilizar el proceso de entrega"
+              class="h-5 w-5 border border-light rounded-md bg-light accent-light"
+            />
+            <label for="efficiency">Agilizar el proceso de entrega</label>
+          </div>
+
+          <div class="flex items-center gap-1">
+            <input
+              type="checkbox"
+              id="events"
+              name="fEvents"
+              value="Monitoriar eventos escolares"
+              class="h-5 w-5 border border-light rounded-md bg-light accent-light"
+            />
+            <label for="events">Monitoriar eventos escolares</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <button
+      type="submit"
+      class="col-span-1 md:col-span-2 bg-primary font-bold border-2 border-light rounded-xl cursor-pointer py-2.5 shadow-light shadow-[4px_5px_0px_-2px] hover:scale-105 transition-transform duration-100"
+    >
+      ¡Solicita una demo GRATIS!
+    </button>
+  </form>
+
+  <Book
+    class="absolute z-10 -rotate-12 w-32 md:w-44 lg:w-56 left-4 md:left-8 lg:left-16 xl:left-32 top-2 md:top-4 fade-in-left"
+  />
+  <Backpack
+    class="absolute z-10 rotate-12 w-32 md:w-44 lg:w-56 right-4 md:right-8 lg:right-16 xl:right-32 top-2 md:top-4 fade-in-right"
+  />
+  <Airplane
+    class="absolute z-10 w-40 md:w-56 lg:w-72 right-4 md:right-8 lg:right-16 xl:right-32 bottom-32 sm:bottom-24 lg:bottom-4 fade-in-right"
+  />
 </section>
+
+<script>
+  // Script to handle the change event of the role field
+  // and set the students field value accordingly
+  // This script should be placed at the end of the document or in a separate file
+  const roleField = document.getElementById("fRole") as HTMLSelectElement;
+
+  roleField?.addEventListener("change", (event: Event) => {
+    const target = event.target as HTMLSelectElement;
+    const selectedValue = target.value;
+    const studentsField = document.getElementById(
+      "fStudents"
+    ) as HTMLSelectElement;
+
+    if (selectedValue === "Padre/Madre/Tutor") {
+      studentsField.value = "No aplica / No sé";
+    } else {
+      studentsField.value = "";
+    }
+  });
+</script>
+
+<script>
+  // Script to handle the form submission
+  // This script should be placed at the end of the document or in a separate file
+
+import { apiWhatsApp, munyaalPhone } from "../utils/contants";
+
+  // Ensure the form has an ID of "contactForm"
+  const contactForm = document.getElementById("contactForm") as HTMLFormElement;
+
+  contactForm?.addEventListener("submit", (event: Event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm as HTMLFormElement);
+    const { fName, fPhone, fMail, fSchool, fRole, fStudents, ...interests } =
+      Object.fromEntries(formData.entries());
+
+    const formattedInterests = Object.entries(interests).map(([key, value]) => `  - ${value}`).join('\n');
+    const message = `Hola, soy *${fName}*.
+
+*Correo electrónico:* ${fMail}
+*Teléfono:* ${fPhone}
+*Rol:* ${fRole}
+*Escuela:* ${fSchool}
+*Número de estudiantes:* ${fStudents}
+
+*Intereses:*
+${formattedInterests}`;
+
+    const url = `${apiWhatsApp}?phone=${munyaalPhone}&text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+
+    contactForm.reset();
+  });
+</script>
+
 <script>
   import { gsap } from "gsap";
-  import { SplitText } from "gsap/SplitText";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(SplitText);
-  gsap.registerPlugin(ScrollTrigger);
-
-  let split = SplitText.create(".callTo-text", {
-    type: "lines",
-  });
-
-  gsap.from(split.lines, {
+  gsap.from(".fade-in", {
     opacity: 0,
-    x: 40,
-    stagger: 0.25,
-    duration: 0.8,
+    duration: 0.4,
     scrollTrigger: {
-      trigger: ".callTo",
-      start: "top 60%",
+      trigger: ".fade-in-left",
+      start: "top 50%",
     },
   });
-  gsap.from(".callTo-button", {
+
+  gsap.from(".fade-in-left", {
     opacity: 0,
-    x: 40,
-    duration: 0.8,
+    x: -150,
+    duration: 0.7,
     scrollTrigger: {
-      trigger: ".callTo",
-      start: "top 60%",
+      trigger: ".fade-in-left",
+      start: "top 50%",
     },
   });
-  gsap.from(".callTo", {
+
+  gsap.from(".fade-in-right", {
     opacity: 0,
-    duration: 1,
-    delay: 0.20,
+    x: 150,
+    duration: 0.7,
     scrollTrigger: {
-      trigger: ".callTo",
-      start: "top 60%",
+      trigger: ".fade-in-right",
+      start: "top 50%",
     },
   });
 </script>
