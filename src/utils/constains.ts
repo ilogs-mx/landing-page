@@ -1,39 +1,27 @@
 import Qr from "../assets/svg/qr.svg";
-import Notification from "../assets/svg/notification.svg";
 import Calendar from "../assets/svg/calendar.svg";
-import Setting from "../assets/svg/setting.svg";
 import Security from "../assets/svg/security.svg";
 import Family from "../assets/svg/family.svg";
 
 export const benefits = [
     {
-        title: "Control por QR",
-        subtitle: "Control por códigos QR únicos y autorizaciones verificadas.",
+        title: "Control por códigos QR dinámicos",
+        subtitle: "Registro de salidas mediante QR personalizados y autorizaciones verificadas.",
         icon: Qr,
     },
     {
-        title: "Notificaciones en tiempo real",
-        subtitle: "Notificaciones instantáneas ante cualquier movimiento.",
-        icon: Notification,
-    },
-    {
-        title: "Ahorro de tiempo y reducción de errores",
-        subtitle: "Optimiza el proceso de salida diaria.",
-        icon: Calendar,
-    },
-    {
-        title: "Fácil implementación",
-        subtitle: "Integración sin complicaciones ni pérdida de tiempo.",
-        icon: Setting,
-    },
-    {
-        title: "Mayor seguridad",
-        subtitle: "Refuerza la seguridad escolar con procesos de salida totalmente verificados.",
+        title: "Mayor seguridad en cada salida",
+        subtitle: "Procesos 100% verificados que refuerzan la seguridad escolar.",
         icon: Security,
     },
     {
-        title: "Colaboración con padres",
-        subtitle: "Facilita la comunicación y cooperación entre padres y personal escolar.",
+        title: "Tranquilidad para madres, padres y tutores",
+        subtitle: "Confianza y control total en cada entrega de sus hijos.",
         icon: Family,
+    },
+    {
+        title: "Eventos escolares",
+        subtitle: "Crea eventos escolares y notifica al instante a los padres de familia mediante la aplicación",
+        icon: Calendar,
     },
 ];

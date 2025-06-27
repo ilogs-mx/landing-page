@@ -27,5 +27,18 @@
     --font-brand: "Oliciy", sans-serif;
 }
 
+.swiper-pagination-bullet {
+  background-color: #F28705; 
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: #F28705;
+}
+
+
+
 
 

@@ -1,0 +1,97 @@
+---
+import Title from "./Title.astro";
+import Play from "../assets/svg/play.svg";
+import Menuleft from "../assets/svg/menuleft.svg";
+import Menuright from "../assets/svg/menuright.svg";
+
+const videos = [
+  {
+    id: "EpjcOyA5TZM",
+    title: "Como maestro, ¡esto cambió todo en mi escuela!",
+    thumbnail: "/image/banner-video1.webp",
+  },
+  {
+    id: "Lq045r47V3M",
+    title: "¡Así cambió mi manera de recoger a mi hijo con iLogs!",
+    thumbnail: "/image/banner-video2.webp",
+  },
+];
+---
+
+<section class="py-10 px-4 section-slide">
+  <div class="slide">
+    <div class="mb-6 sm:mb-15">
+      <Title title="Testimonios" />
+    </div>
+    <div class="swiper max-w-4xl mx-auto overflow-visible relative">
+      <div class="swiper-wrapper slide">
+        {
+          videos.map((video) => (
+            <div class="swiper-slide flex justify-center items-center">
+              <div
+                class="testimonials flex aspect-video max-w-4xl  rounded-xl overflow-hidden relative cursor-pointer"
+                onclick={`this.outerHTML = '<iframe class="justify-center items-center w-80 lg:w-full h-50 lg:h-[439px] rounded-xl" src="https://www.youtube.com/embed/${video.id}?autoplay=1" title="${video.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
+              >
+                <img
+                  src={video.thumbnail}
+                  alt={`Vista previa de ${video.title}`}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-25 h-25 lg:w-35 lg:h-35 bg-center bg-no-repeat bg-contain fill-secondary opacity-45 cursor-pointer group hover:scale-115 duration-500">
+                    <Play />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="swiper-pagination mt-4"></div>
+      <div class="swiper-button-prev !text-primary">
+      </div>
+      <div class="swiper-button-next !text-primary">
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".slide", {
+    opacity: 0,
+    y: 100,
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: ".section-slide",
+      start: "top 50%",
+    },
+  });
+  import Swiper from "swiper";
+  import { Navigation, Pagination} from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+
+  const swiper = new Swiper(".swiper", {
+    modules: [Navigation, Pagination],
+    grabCursor: true,
+    centeredSlides: true,
+    loop: true,
+    slidesPerView: 1,
+
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+</script>
