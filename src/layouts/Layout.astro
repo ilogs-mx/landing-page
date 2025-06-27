@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import WhatsappWidget from "../components/whatsappWidget.astro";
 
 const { title } = Astro.props;
 
@@ -19,7 +18,7 @@ interface Props {
     <link rel="icon" type="image/svg+xml" href="/icon-ilogs.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <meta property="og:title" content="iLogs" />
+    <meta property="og:title" content="iLogs - Seguridad & Orden" />
     <meta
       property="og:description"
       content="iLogs Seguridad & Orden en cada Salida Escolar"
@@ -38,11 +37,16 @@ interface Props {
       content="https://descubre.ilogs.com.mx/image/BannerOG.webp"
     />
     <meta name="twitter:url" content="https://descubre.ilogs.com.mx/" />
+    <meta
+      name="description"
+      content="Digitaliza las salidas escolares con iLogs, las salidas escolares son más seguras, ofreciendo confianza a padres y personal educativo"
+
+    />
+    <meta name="Keywords" content="Control de salida, Gestión de salidas escolar, Seguridad estudiantil, Horarios de salida escolar, salida supervisada, Seguridad escolar, Gestión de permisos escolares, Control parental, Informes de salida escolar, Monitorización estudiantil, Registro de incidentes de salida, logistica de entrada, protección escolar,prevención escolar,escuela, educación">
   </head>
   <body
     class="bg-background text-foreground font-sans relative overflow-x-hidden pb-30 sm:pb-30"
   >
-    <WhatsappWidget />
     <Navbar />
     <main>
       <slot />
