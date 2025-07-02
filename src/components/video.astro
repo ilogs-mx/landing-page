@@ -7,33 +7,33 @@ const title = "Presentación de iLogs";
 const thumbnail = "/image/banner-ilogs.webp";
 ---
 
-<section class=" p-5 lg:px-20 lg:pb-20">
+<section class="p-5 lg:px-20 lg:pb-20">
   <div class="section-testimonials">
-  <div class="testimonials mb-6 sm:mb-15">
-    <Title title="¡Diferénciate de los demás" />
-    <Title title="y aumenta tu matricula escolar!"/>
-  </div>
-   <div class="flex justify-center items-center w-full h-3/5">
-  <div
-    class="testimonials flex aspect-video max-w-4xl w-full rounded-xl overflow-hidden relative"
-    onclick={`this.outerHTML = '<iframe class="items-center w-3xs sm:w-full h-37 sm:h-[439px] rounded-xl" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
-  >
-    <img
-      src={thumbnail}
-      alt={`Vista previa de ${title}`}
-      class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-      loading="lazy"
-    />
-    <div class="absolute inset-0 flex items-center justify-center">
+    <div class="testimonials mb-6 sm:mb-15">
+      <Title title="¡Diferénciate de los demás" />
+      <Title title="y aumenta tu matricula escolar!" />
+    </div>
+    <div class="flex justify-center items-center w-full h-3/5">
       <div
-        class="w-35 h-35 bg-center bg-no-repeat bg-contain fill-secondary opacity-45 cursor-pointer group hover:scale-115 duration-500"
+        class="testimonials flex aspect-video max-w-4xl w-full rounded-xl overflow-hidden relative"
+        onclick={`this.outerHTML = '<iframe class="items-center max-w-4xl w-full h-[250px]   sm:h-[320px] md:h-[510px] lg:h-[500px] rounded-xl" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
       >
-        <Play />
+        <img
+          src={thumbnail}
+          alt={`Vista previa de ${title}`}
+          class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div
+            class="w-25 h-25 md:w-35 md:h-35 bg-center bg-no-repeat bg-contain fill-secondary opacity-45 cursor-pointer group hover:scale-115 duration-500"
+          >
+            <Play />
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-    </div>
 </section>
 <script>
   import { gsap } from "gsap";
