@@ -3,9 +3,10 @@ import Title from "./Title.astro";
 import Airplane from "../assets/svg/airplane.svg";
 import Backpack from "../assets/svg/backpack.svg";
 import Book from "../assets/svg/book.svg";
+import Mochila from "../assets/svg/icon-mochila.svg";
 ---
 
-<section class="mt-16 py-16 sm:py-8 p-5 md:p-20 bg-primary relative" id="contact-section">
+<section class="section-call mt-16 py-16 sm:py-8 p-5 md:p-20 bg-primary relative overflow-hidden" id="contact-section">
   <Title title="Contactanos" class="text-light mb-8 fade-in" />
 
   <form
@@ -184,10 +185,13 @@ import Book from "../assets/svg/book.svg";
   </form>
 
   <Book
-    class="absolute z-10 -rotate-12 w-32 md:w-44 lg:w-56 left-4 md:left-8 lg:left-16 xl:left-32 top-2 md:top-4 fade-in-left"
+    class="absolute z-10 -rotate-30 w-25 md:w-44 lg:w-56 left-0 md:left-8 lg:left-16 xl:left-32 top-2 md:top-4 fade-in-left"
   />
-  <Backpack
+  <!-- <Backpack
     class="absolute z-10 rotate-12 w-32 md:w-44 lg:w-56 right-4 md:right-8 lg:right-16 xl:right-32 top-2 md:top-4 fade-in-right"
+  /> -->
+  <Mochila
+  class="absolute z-10 rotate-12 w-20 md:w-44 lg:w-56 right-0 md:right-8 lg:right-16 xl:right-32 top-3 md:top-4 fade-in-right"
   />
   <Airplane
     class="absolute z-10 w-40 md:w-56 lg:w-72 right-4 md:right-8 lg:right-16 xl:right-32 bottom-32 sm:bottom-24 lg:bottom-4 fade-in-right"
@@ -256,27 +260,27 @@ ${formattedInterests}`;
     opacity: 0,
     duration: 0.4,
     scrollTrigger: {
-      trigger: ".fade-in-left",
+      trigger: ".section-call",
       start: "top 50%",
     },
   });
 
   gsap.from(".fade-in-left", {
     opacity: 0,
-    x: -150,
+    x: -100,
     duration: 0.7,
     scrollTrigger: {
-      trigger: ".fade-in-left",
+      trigger: ".section-call",
       start: "top 50%",
     },
   });
 
   gsap.from(".fade-in-right", {
     opacity: 0,
-    x: 150,
+    x: 100,
     duration: 0.7,
     scrollTrigger: {
-      trigger: ".fade-in-right",
+      trigger: ".section-call",
       start: "top 50%",
     },
   });

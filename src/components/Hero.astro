@@ -1,25 +1,28 @@
 ---
-
+import Rule from "../assets/svg/rule.svg";
+import Rule2 from "../assets/svg/rule2.svg";
+import Apple from "../assets/svg/applee.svg";
+import Pen from "../assets/svg/pen.svg";
 ---
 
 <section class="bg-primary">
   <div
-    class="relative bg-[url(/image/bg-hero2.webp)] bg-no-repeat bg-contain bg-center sm:bg-[url(/image/bg-hero.webp)]"
+    class="relative  bg-no-repeat bg-contain "
   >
     <div class="hero flex flex-col lg:flex-row content-center justify-center">
       <div
-        class="w-full flex flex-col items-center text-center justify-center mt-25 lg:mt-60"
+        class="w-full flex flex-col items-center text-center justify-center mt-30 lg:mt-60"
       >
         <h1 class="hero-text font-brand text-base lg:text-4xl text-light">
-          Digitaliza las salidas <br /> escolares.Hazlas más<br /> seguras y ágiles.
+          Digitaliza las salidas escolares.<br />Hazlas más seguras y ágiles.
         </h1>
         <p class="hero-text text-base lg:text-xl text-light mt-2">
-          Optimiza cada entrega con <br />una solución sencilla y confiable.
+          Optimiza cada entrega con una solución <br /> sencilla y confiable.
         </p>
 
         <button
           type="button"
-          class=" button-hero rounded-2xl p-2 lg:p-4 bg-dark text-light font-bold mt-6 text-xs lg:text-2xl hover:bg-light hover:text-dark cursor-pointer"
+          class=" button-hero rounded-2xl p-2 lg:p-4 bg-dark text-light font-bold mt-2 lg:mt-6 text-xs lg:text-2xl hover:bg-light hover:text-dark cursor-pointer"
           >¡Solicita una demo GRATIS!
         </button>
       </div>
@@ -28,7 +31,7 @@
           <img
             src="image/hero.png"
             alt="Seguridad Escolar"
-            class="hero-image w-60 lg:w-3xl lg:h-3/4 absolute z-15 top-55 md:top-80 lg:top-10 left-7 md:left-60 lg:left-3/6"
+            class="hero-image w-60 lg:w-3xl lg:h-3/4 absolute z-15 top-65 md:top-80 lg:top-10 left-15 md:left-60 lg:left-1/2"
           />
         </div>
       </div>
@@ -42,7 +45,11 @@
         class="fill-[#ffffff] dark:fill-[#262626]"
         d="M0,160L80,176C160,192,320,224,480,202.7C640,181,800,107,960,69.3C1120,32,1280,32,1360,32L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
       ></path>
-    </svg>
+    </svg> 
+       <Rule class="button-hero absolute z-10 w-20 lg:w-45 bottom-10 lg:bottom-50 left-0 lg:left-10 -rotate-40"/>
+    <Rule2 class="button-hero absolute z-10 w-20 lg:w-45 top-15 lg:top-25 rotate-85 lg:rotate-80 left-0 lg:left-8"/>
+    <!-- <Apple class="absolute z-10 w-45 bottom-50 right-1/2 rotate-10"/> -->
+    <Pen class ="button-hero absolute z-10 w-18 lg:w-45 top-15 lg:top-20 right-5 lg:right-1/2 -rotate-40 lg:rotate-45"/>
   </div>
 </section>
 <script>
@@ -70,7 +77,7 @@
 
   gsap.from(".hero-image", {
     y: 150,
-    opacity: 0,
+    opacity: -5,
     ease: "power4.out",
     duration: 0.5,
     scrollTrigger: {
