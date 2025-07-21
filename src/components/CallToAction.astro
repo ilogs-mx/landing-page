@@ -6,7 +6,10 @@ import Book from "../assets/svg/book.svg";
 import Mochila from "../assets/svg/icon-mochila.svg";
 ---
 
-<section class="section-call mt-16 py-16 sm:py-8 p-5 md:p-20 bg-primary relative overflow-hidden" id="contact-section">
+<section
+  class="section-call mt-16 py-16 sm:py-8 p-5 md:p-20 bg-primary relative overflow-hidden"
+  id="contact-section"
+>
   <Title title="Contáctanos" class="text-light mb-8 fade-in" />
 
   <form
@@ -66,6 +69,33 @@ import Mochila from "../assets/svg/icon-mochila.svg";
         name="fSchool"
         id="fSchool"
         placeholder="Ej. Escuela Secundaria ABC"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      />
+    </div>
+    <!-- Estado field -->
+    <div>
+      <label for="fState" class="block text-base font-medium text-light mb-2">
+        Estado
+      </label>
+      <input
+        type="text"
+        name="fState"
+        id="fState"
+        placeholder="Ej. Quintana Roo"
+        class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
+      />
+    </div>
+    <!-- Ciudad field -->
+    <div>
+      <label for="fCity" class="block text-base font-medium text-light mb-2">
+        Ciudad
+      </label>
+      <input
+        required
+        type="text"
+        name="fCity"
+        id="fCity"
+        placeholder="Ej. Playa del Carmen"
         class="w-full rounded-md border border-light bg-light py-2 px-4 text-base font-medium text-dark outline-none focus:border-dark focus:shadow-md"
       />
     </div>
@@ -161,17 +191,6 @@ import Mochila from "../assets/svg/icon-mochila.svg";
             />
             <label for="efficiency">Agilizar el proceso de entrega</label>
           </div>
-
-          <!-- <div class="flex items-center gap-1">
-            <input
-              type="checkbox"
-              id="events"
-              name="fEvents"
-              value="Monitoriar eventos escolares"
-              class="h-5 w-5 border border-light rounded-md bg-light accent-light"
-            />
-            <label for="events">Monitoriar eventos escolares</label>
-          </div> -->
         </div>
       </fieldset>
     </div>
@@ -191,7 +210,7 @@ import Mochila from "../assets/svg/icon-mochila.svg";
     class="absolute z-10 rotate-12 w-32 md:w-44 lg:w-56 right-4 md:right-8 lg:right-16 xl:right-32 top-2 md:top-4 fade-in-right"
   /> -->
   <Mochila
-  class="absolute z-10 rotate-12 w-20 md:w-44 lg:w-56 right-0 md:right-8 lg:right-16 xl:right-32 top-3 md:top-4 fade-in-right"
+    class="absolute z-10 rotate-12 w-20 md:w-44 lg:w-56 right-0 md:right-8 lg:right-16 xl:right-32 top-3 md:top-4 fade-in-right"
   />
   <Airplane
     class="absolute z-10 w-40 md:w-56 lg:w-72 right-4 md:right-8 lg:right-16 xl:right-32 bottom-32 sm:bottom-24 lg:bottom-4 fade-in-right"
@@ -223,7 +242,7 @@ import Mochila from "../assets/svg/icon-mochila.svg";
   // Script to handle the form submission
   // This script should be placed at the end of the document or in a separate file
 
-import { apiWhatsApp, munyaalPhone } from "../utils/contants";
+  import { apiWhatsApp, munyaalPhone } from "../utils/contants";
 
   // Ensure the form has an ID of "contactForm"
   const contactForm = document.getElementById("contactForm") as HTMLFormElement;
@@ -231,10 +250,21 @@ import { apiWhatsApp, munyaalPhone } from "../utils/contants";
   contactForm?.addEventListener("submit", (event: Event) => {
     event.preventDefault();
     const formData = new FormData(contactForm as HTMLFormElement);
-    const { fName, fPhone, fMail, fSchool, fRole, fStudents, ...interests } =
-      Object.fromEntries(formData.entries());
+    const {
+      fName,
+      fPhone,
+      fMail,
+      fSchool,
+      fRole,
+      fStudents,
+      fCity,
+      fState,
+      ...interests
+    } = Object.fromEntries(formData.entries());
 
-    const formattedInterests = Object.entries(interests).map(([key, value]) => `  - ${value}`).join('\n');
+    const formattedInterests = Object.entries(interests)
+      .map(([key, value]) => `  - ${value}`)
+      .join("\n");
     const message = `Hola, soy *${fName}*.
 
 *Correo electrónico:* ${fMail}
@@ -242,6 +272,8 @@ import { apiWhatsApp, munyaalPhone } from "../utils/contants";
 *Rol:* ${fRole}
 *Escuela:* ${fSchool}
 *Número de estudiantes:* ${fStudents}
+*Estado:* ${fState}
+*Ciudad:* ${fCity}
 
 *Intereses:*
 ${formattedInterests}`;
