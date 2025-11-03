@@ -1,0 +1,35 @@
+---
+import Instagram from "./social-networks/Instagram.astro";
+import Facebook from "./social-networks/Facebook.astro";
+import Tiktok from "./social-networks/Tiktok.astro";
+import Linkedin from "./social-networks/Linkedin.astro";
+---
+
+<nav class="w-full h-16 px-8 bg-primary shadow flex justify-between items-center">
+  <img
+    src="/image/logo.webp"
+    alt="Ilogs"
+    class="icon w-16 h-16 md:w-20 md:h-20"
+  />
+
+  <div class="flex gap-3">
+    <Linkedin />
+
+    <Tiktok />
+
+    <Facebook />
+
+    <Instagram />
+  </div>
+ 
+</nav>
+
+<script>
+  import { gsap } from "gsap";
+
+  gsap.from(".icon", {
+    y: -100,
+    stagger: 0.25,
+    duration: 0.3,
+  });
+</script>
