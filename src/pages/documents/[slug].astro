@@ -1,0 +1,30 @@
+---
+import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const documents = await getCollection("documents");
+
+  return documents.map((document) => ({
+    params: { slug: document.slug },
+    props: { document },
+  }));
+}) satisfies GetStaticPaths;
+
+const { document } = Astro.props;
+
+const metadata = document.data;
+
+const { Content, headings } = await document.render();
+---
+
+<MarkdownLayout
+  title={metadata.title}
+  description={metadata.description}
+  tags={metadata.tags}
+>
+  <a href="/">Regresar</a>
+  
+  <Content />
+</MarkdownLayout>
