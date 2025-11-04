@@ -50,7 +50,10 @@ Estos Términos regulan el acceso, registro, uso y las condiciones bajo las cual
    - Reproducir, duplicar, distribuir, revender o explotar comercialmente los Servicios sin autorización expresa por escrito de la Empresa.
 
 ---
-
+<!--
+  En caso de modificar los terminos, asegúrese de actualizar la fecha de "Última actualización".
+  Tambien recuerde actualizar la version del sitio descubre.ilogs.com
+-->
 ## **5. Contenido y datos del Usuario**
 
 1. La Empresa podrá permitir que el Usuario cargue, introduzca o transmita datos, fotografías o información relacionada (“Contenido del Usuario”).  

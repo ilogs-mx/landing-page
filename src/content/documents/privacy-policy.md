@@ -5,7 +5,10 @@ author: iLogs
 date: 2025-10-31
 tags: [privacidad, protección de datos, política, legal, ARCO, seguridad, datos personales]
 ---
-
+<!--
+  En caso de modificar los politicas de privacidad, asegúrese de actualizar la fecha de "Última actualización".
+  Tambien recuerde actualizar la version del sitio descubre.ilogs.com
+-->
 # **Política de Privacidad de iLogs**
 
 **Última actualización:** 31 de octubre de 2025
