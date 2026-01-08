@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.munyaal.ilogs",
+      "sha256_cert_fingerprints": [
+        "A8:C1:DD:3C:87:B7:A8:1A:7B:26:DF:C1:DC:24:48:1F:7C:6B:19:1B:0D:1E:80:8E:71:58:EC:A0:C5:20:3F:EA"
+      ]
+    }
+  }
+]
