@@ -1,0 +1,40 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "PT5Y6T3QM8.com.munyaal.ilogs",
+        "paths": [
+          "NOT /form/*",
+          "/forgot/*",
+          "/pickup-request/*",
+          "/send-friend-request/*",
+          "/event-confirmation/T/*"
+        ]
+      },
+      {
+        "appID": "PT5Y6T3QM8.com.munyaal.ilogsColaboradores",
+        "paths": [
+          "NOT /form/*",
+          "NOT /pickup-request/*",
+          "NOT /send-friend-request/*",
+          "forgot/*",
+          "/event-confirmation/C/*",
+          "/outbounds-permissions/C/*"
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "PT5Y6T3QM8.com.munyaal.ilogs",
+      "PT5Y6T3QM8.com.munyaal.ilogsColaboradores"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "PT5Y6T3QM8.com.munyaal.ilogs",
+      "PT5Y6T3QM8.com.munyaal.ilogsColaboradores"
+    ]
+  }
+}
