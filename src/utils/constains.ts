@@ -33,6 +33,30 @@ export const benefits = [
   },
 ];
 
+// Pilares de la sección "¿Qué es iLogs?": describen a los tres actores
+// que intervienen en la salida (escuela, familia, puerta), para que quede
+// claro qué es el producto, no solo qué beneficios entrega.
+export const whatIsFeatures = [
+  {
+    title: "Para la escuela",
+    subtitle:
+      "Un panel donde registras a tus alumnos y defines quién está autorizado a recogerlos. Tú controlas el proceso de principio a fin.",
+    icon: Book,
+  },
+  {
+    title: "Para la familia",
+    subtitle:
+      "Una app donde el tutor autoriza a familiares y genera un QR dinámico con vigencia de 24 h para cada salida.",
+    icon: Family,
+  },
+  {
+    title: "Para la puerta",
+    subtitle:
+      "El personal escanea el QR y confirma la entrega en segundos, sin listas manuales ni llamadas. Todo queda registrado.",
+    icon: Qr,
+  },
+];
+
 // Puntos de dolor que viven las escuelas sin un proceso digital de salida.
 export const painPoints = [
   {

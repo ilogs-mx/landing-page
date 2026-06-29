@@ -1,34 +1,36 @@
 ---
 import WhatsAppButton from "../ui/WhatsAppButton.astro";
+import Section from "../ui/Section.astro";
 import Rule from "../../assets/svg/rule.svg";
 import Rule2 from "../../assets/svg/rule2.svg";
 import Pen from "../../assets/svg/pen.svg";
 ---
 
 <section class="hero bg-primary relative overflow-hidden">
-  <div
-    class="mx-auto max-w-6xl px-5 md:px-8 pt-28 md:pt-36 pb-40 md:pb-56 grid lg:grid-cols-2 gap-10 items-center"
+  <Section
+    class="pt-24 md:pt-28 pb-24 md:pb-28"
+    containerClass="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
   >
     <div class="hero-text flex flex-col items-center lg:items-start text-center lg:text-left">
       <span
         class="block text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-light/80 mb-4"
       >
-        Plataforma para escuelas
+        ¿Qué es iLogs?
       </span>
       <h1
         class="font-brand text-3xl md:text-5xl lg:text-6xl text-light leading-tight"
       >
-        Salidas escolares seguras,
-        <br class="hidden md:block" /> ordenadas y sin papel.
+        La app que digitaliza la salida de tus alumnos con QR.
       </h1>
       <p
-        class="mt-5 text-base md:text-lg text-light/90 max-w-md leading-relaxed"
+        class="mt-4 text-base md:text-lg text-light/90 max-w-md leading-relaxed"
       >
-        iLogs digitaliza la entrega de tus alumnos con QR dinámicos: más
-        seguridad para las familias y menos caos en la puerta de tu escuela.
+        iLogs sustituye listas manuales y llamadas por un código QR dinámico de
+        24 h: más seguridad para las familias y menos caos en la puerta de tu
+        escuela.
       </p>
 
-      <div class="mt-8 flex flex-col sm:flex-row gap-3 items-center">
+      <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-start">
         <WhatsAppButton
           size="lg"
           message="¡Hola! Quiero agendar una demo de iLogs para mi escuela."
@@ -36,16 +38,16 @@ import Pen from "../../assets/svg/pen.svg";
           variant="light"
         />
         <a
-          href="#como-funciona"
-          class="inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-lg md:text-xl font-bold text-light border-2 border-light/60 hover:bg-light/10 transition-colors"
+          href="#que-es"
+          class="inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-base md:text-lg font-semibold text-light/90 border border-light/40 hover:bg-light/10 hover:border-light/60 transition-colors w-full sm:w-auto"
         >
-          Ver cómo funciona
+          Ver qué es iLogs
         </a>
       </div>
     </div>
 
     <div class="relative flex justify-center lg:justify-end">
-      <div class="hero-image relative w-56 md:w-80 lg:w-[26rem]">
+      <div class="hero-image relative w-52 md:w-72 lg:w-96">
         <img
           src="image/hero.png"
           alt="App iLogs en uso durante la salida escolar"
@@ -54,16 +56,16 @@ import Pen from "../../assets/svg/pen.svg";
         />
       </div>
     </div>
-  </div>
+  </Section>
 
   <Rule
-    class="absolute z-10 w-20 lg:w-44 bottom-10 lg:bottom-40 left-0 -rotate-40 opacity-80"
+    class="absolute z-10 w-20 lg:w-40 bottom-8 lg:bottom-24 left-0 -rotate-40 opacity-80"
   />
   <Rule2
-    class="absolute z-10 w-20 lg:w-44 top-24 left-0 lg:left-6 rotate-80 opacity-80"
+    class="absolute z-10 w-20 lg:w-40 top-20 left-0 lg:left-6 rotate-80 opacity-80"
   />
   <Pen
-    class="absolute z-10 w-16 lg:w-40 top-24 right-2 lg:right-6 -rotate-40 lg:rotate-45 opacity-80"
+    class="absolute z-10 w-16 lg:w-36 top-20 right-2 lg:right-6 -rotate-40 lg:rotate-45 opacity-80"
   />
 
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 310" class="block w-full relative z-0">

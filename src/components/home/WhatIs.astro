@@ -1,0 +1,83 @@
+---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import BenefitCard from "./BenefitCard.astro";
+import Play from "../../assets/svg/play.svg";
+import { whatIsFeatures } from "../../utils/constains";
+
+const videoId = "PCoODwGT980";
+const videoTitle = "Presentación de iLogs";
+const thumbnail = "/image/banner-ilogs.webp";
+---
+
+<Section id="que-es" class="py-20 md:py-28 what">
+  <SectionHeading
+    eyebrow="¿Qué es iLogs?"
+    title="La plataforma que pone orden y seguridad en la salida de tus alumnos."
+    intro="iLogs es una aplicación para escuelas y familias que digitaliza la entrega de alumnos de principio a fin: sustituye las listas manuales y las llamadas por un código QR dinámico, con vigencia de 24 h, que el personal verifica en segundos en la puerta."
+  />
+
+  <div class="mt-12 grid gap-5 sm:grid-cols-3 what-grid">
+    {
+      whatIsFeatures.map((feature) => (
+        <BenefitCard
+          title={feature.title}
+          subtitle={feature.subtitle}
+          icon={feature.icon}
+          class="what-card"
+        />
+      ))
+    }
+  </div>
+
+  <div
+    class="what-player mt-14 flex aspect-video max-w-4xl mx-auto w-full rounded-2xl overflow-hidden relative cursor-pointer shadow-lg"
+    onclick={`this.outerHTML = '<iframe class="w-full h-full aspect-video rounded-2xl" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="${videoTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'`}
+  >
+    <img
+      src={thumbnail}
+      alt={`Vista previa de ${videoTitle}`}
+      class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 flex items-center justify-center bg-dark/20">
+      <div
+        class="flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-primary/90 text-light hover:scale-110 transition-transform duration-300"
+      >
+        <Play class="w-8 h-8 md:w-12 md:h-12 fill-light" />
+      </div>
+    </div>
+  </div>
+
+  <p class="mt-6 text-center text-sm md:text-base text-foreground/60">
+    Conoce iLogs en menos de 2 minutos.
+  </p>
+</Section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".what-card", {
+    opacity: 0,
+    y: 30,
+    duration: 0.5,
+    stagger: 0.12,
+    scrollTrigger: {
+      trigger: ".what",
+      start: "top 70%",
+    },
+  });
+
+  gsap.from(".what-player", {
+    opacity: 0,
+    y: 40,
+    duration: 0.7,
+    scrollTrigger: {
+      trigger: ".what-player",
+      start: "top 80%",
+    },
+  });
+</script>
