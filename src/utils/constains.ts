@@ -76,34 +76,6 @@ export const painPoints = [
   },
 ];
 
-// Pasos del “cómo funciona”.
-export const steps = [
-  {
-    number: "1",
-    title: "Registra alumnos y autorizados",
-    description:
-      "Carga a tus alumnos y define quiénes están autorizados a recogerlos desde el panel de la escuela.",
-  },
-  {
-    number: "2",
-    title: "El padre genera su QR",
-    description:
-      "Desde la app, el tutor genera un QR dinámico con vigencia de 24 h para esa salida.",
-  },
-  {
-    number: "3",
-    title: "El personal valida en puerta",
-    description:
-      "El personal escanea el QR y confirma la autorización en segundos, sin papel ni llamadas.",
-  },
-  {
-    number: "4",
-    title: "Entrega segura y notificada",
-    description:
-      "El alumno es entregado solo a personas autorizadas y el tutor recibe una notificación al instante.",
-  },
-];
-
 // Testimonios breves de texto (además de los videos).
 export const testimonials = [
   {
