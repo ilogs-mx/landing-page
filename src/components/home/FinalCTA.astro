@@ -1,0 +1,278 @@
+---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import WhatsAppButton from "../ui/WhatsAppButton.astro";
+import Book from "../../assets/svg/book.svg";
+import Mochila from "../../assets/svg/icon-mochila.svg";
+import Airplane from "../../assets/svg/airplane.svg";
+---
+
+<Section
+  id="contact-section"
+  class="final-cta pt-20 pb-24 md:pt-24 md:pb-32 bg-primary rounded-t-[2.5rem] -mt-6 relative overflow-hidden"
+>
+  <div class="relative z-20 flex flex-col items-center">
+    <SectionHeading
+      light
+      eyebrow="Hablemos"
+      title="Agenda tu demo gratuita por WhatsApp."
+      intro="Cuéntanos sobre tu escuela y te mostramos iLogs en acción. Sin compromiso."
+    />
+
+    <div class="mt-6 flex justify-center">
+      <WhatsAppButton
+        size="lg"
+        variant="light"
+        label="Escribimos ahora por WhatsApp"
+        message="¡Hola! Quiero agendar una demo gratuita de iLogs para mi escuela."
+      />
+    </div>
+
+    <p class="mt-4 text-center text-sm text-light/70">
+      O déjanos tus datos y te contactamos:
+    </p>
+
+    <form
+      id="contactForm"
+      class="mt-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 fade-in"
+    >
+      <div>
+        <label for="fName" class="block text-sm font-bold text-light mb-2">
+          Nombre completo
+        </label>
+        <input
+          required
+          type="text"
+          name="fName"
+          id="fName"
+          placeholder="Ej. Juan Pérez"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        />
+      </div>
+      <div>
+        <label for="fPhone" class="block text-sm font-bold text-light mb-2">
+          Teléfono
+        </label>
+        <input
+          required
+          type="tel"
+          name="fPhone"
+          id="fPhone"
+          placeholder="Ej. 123 456 7890"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        />
+      </div>
+      <div>
+        <label for="fMail" class="block text-sm font-bold text-light mb-2">
+          Correo electrónico
+        </label>
+        <input
+          type="email"
+          name="fMail"
+          id="fMail"
+          placeholder="Ej. ejemplo@dominio.com"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        />
+      </div>
+      <div>
+        <label for="fSchool" class="block text-sm font-bold text-light mb-2">
+          Escuela / institución
+        </label>
+        <input
+          required
+          type="text"
+          name="fSchool"
+          id="fSchool"
+          placeholder="Ej. Escuela Secundaria ABC"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        />
+      </div>
+      <div>
+        <label for="fState" class="block text-sm font-bold text-light mb-2">
+          Estado
+        </label>
+        <input
+          type="text"
+          name="fState"
+          id="fState"
+          placeholder="Ej. Quintana Roo"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        />
+      </div>
+      <div>
+        <label for="fCity" class="block text-sm font-bold text-light mb-2">
+          Ciudad
+        </label>
+        <input
+          required
+          type="text"
+          name="fCity"
+          id="fCity"
+          placeholder="Ej. Playa del Carmen"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        />
+      </div>
+      <div>
+        <label for="fRole" class="block text-sm font-bold text-light mb-2">
+          ¿Cuál es tu rol?
+        </label>
+        <select
+          required
+          name="fRole"
+          id="fRole"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        >
+          <option value="" selected disabled hidden>Selecciona aquí</option>
+          <option value="Padre/Madre/Tutor">Padre / Madre / Tutor</option>
+          <option value="Director(a)">Director(a)</option>
+          <option value="Coordinador(a)">Coordinador(a)</option>
+          <option value="Personal administrativo">Personal administrativo</option>
+        </select>
+      </div>
+      <div>
+        <label for="fStudents" class="block text-sm font-bold text-light mb-2">
+          ¿Cuántos alumnos?
+        </label>
+        <select
+          required
+          name="fStudents"
+          id="fStudents"
+          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+        >
+          <option value="" selected disabled hidden>Selecciona aquí</option>
+          <option value="Menos de 100">Menos de 100</option>
+          <option value="100 – 300">100 – 300</option>
+          <option value="Más de 300">Más de 300</option>
+          <option value="No aplica / No sé">No aplica / No sé</option>
+        </select>
+      </div>
+
+      <div class="col-span-1 md:col-span-2">
+        <fieldset>
+          <legend class="block text-sm font-bold text-light mb-2">
+            ¿Qué te gustaría mejorar con iLogs?
+          </legend>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="security"
+                name="fSecurity"
+                value="Seguridad en salidas escolares"
+                class="h-5 w-5 rounded-md accent-light"
+              />
+              <label for="security">Seguridad en salidas</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="digitalization"
+                name="fDigitalization"
+                value="Digitalizar el proceso de salida"
+                class="h-5 w-5 rounded-md accent-light"
+              />
+              <label for="digitalization">Digitalizar la salida</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="monitoring"
+                name="fMonitoring"
+                value="Gestión de permisos para salidas o eventos"
+                class="h-5 w-5 rounded-md accent-light"
+              />
+              <label for="monitoring">Permisos para salidas</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="efficiency"
+                name="fEfficiency"
+                value="Agilizar el proceso de entrega"
+                class="h-5 w-5 rounded-md accent-light"
+              />
+              <label for="efficiency">Agilizar la entrega</label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button
+        type="submit"
+        class="col-span-1 md:col-span-2 bg-dark text-light font-bold rounded-xl cursor-pointer py-3 text-lg shadow-lg hover:scale-[1.02] transition-transform"
+      >
+        Enviar por WhatsApp
+      </button>
+    </form>
+
+    <p class="mt-4 text-center text-xs text-light/70 max-w-md">
+      Al enviar, abrirás WhatsApp con tus datos precargados para que nos escribas
+      directamente.
+    </p>
+  </div>
+
+  <Book
+    class="absolute z-10 -rotate-30 w-24 md:w-40 left-0 md:left-8 top-8 opacity-80"
+  />
+  <Mochila
+    class="absolute z-10 rotate-12 w-20 md:w-40 right-0 md:right-8 top-6 opacity-80"
+  />
+  <Airplane
+    class="absolute z-10 w-32 md:w-48 right-4 md:right-12 bottom-2 opacity-80"
+  />
+</Section>
+
+<script>
+  import { apiWhatsApp, munyaalPhone } from "../../utils/contants";
+
+  const roleField = document.getElementById("fRole") as HTMLSelectElement;
+  roleField?.addEventListener("change", (event: Event) => {
+    const target = event.target as HTMLSelectElement;
+    const studentsField = document.getElementById(
+      "fStudents"
+    ) as HTMLSelectElement;
+    if (target.value === "Padre/Madre/Tutor") {
+      studentsField.value = "No aplica / No sé";
+    } else {
+      studentsField.value = "";
+    }
+  });
+
+  const contactForm = document.getElementById("contactForm") as HTMLFormElement;
+  contactForm?.addEventListener("submit", (event: Event) => {
+    event.preventDefault();
+    const formData = new FormData(contactForm as HTMLFormElement);
+    const {
+      fName,
+      fPhone,
+      fMail,
+      fSchool,
+      fRole,
+      fStudents,
+      fCity,
+      fState,
+      ...interests
+    } = Object.fromEntries(formData.entries());
+
+    const formattedInterests = Object.entries(interests)
+      .map(([, value]) => `  - ${value}`)
+      .join("\n");
+    const message = `Hola, soy *${fName}*.
+
+*Correo:* ${fMail}
+*Teléfono:* ${fPhone}
+*Rol:* ${fRole}
+*Escuela:* ${fSchool}
+*Alumnos:* ${fStudents}
+*Estado:* ${fState}
+*Cd:* ${fCity}
+
+*Me interesa mejorar:*
+${formattedInterests}`;
+
+    const url = `${apiWhatsApp}?phone=${munyaalPhone}&text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+    contactForm.reset();
+  });
+</script>

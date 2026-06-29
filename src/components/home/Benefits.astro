@@ -1,0 +1,64 @@
+---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import BenefitCard from "./BenefitCard.astro";
+import { benefits } from "../../utils/constains";
+---
+
+<Section id="beneficios" class="py-20 md:py-28 benefits">
+  <SectionHeading
+    eyebrow="Beneficios"
+    title="Todo lo que tu escuela necesita para una salida segura."
+    intro="Una sola plataforma para verificar autorizaciones, notificar a las familias y dejar atrás el papel."
+  />
+
+  <div class="mt-12 grid sm:grid-cols-2 gap-5 benefits-grid">
+    {
+      benefits.map((benefit) => (
+        <BenefitCard
+          title={benefit.title}
+          subtitle={benefit.subtitle}
+          icon={benefit.icon}
+          class="benefit-card"
+        />
+      ))
+    }
+  </div>
+
+  <div class="mt-10 rounded-3xl border-2 border-primary/30 bg-primary/5 benefits-mockup overflow-hidden">
+    <img
+      src="image/MOKCUP-INICIO.webp"
+      alt="Vista de la aplicación iLogs"
+      class="w-full max-h-[480px] object-contain"
+      loading="lazy"
+    />
+  </div>
+</Section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".benefit-card", {
+    opacity: 0,
+    y: 30,
+    duration: 0.5,
+    stagger: 0.12,
+    scrollTrigger: {
+      trigger: ".benefits",
+      start: "top 70%",
+    },
+  });
+
+  gsap.from(".benefits-mockup", {
+    opacity: 0,
+    y: 40,
+    duration: 0.6,
+    scrollTrigger: {
+      trigger: ".benefits-mockup",
+      start: "top 80%",
+    },
+  });
+</script>

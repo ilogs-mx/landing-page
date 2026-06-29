@@ -1,0 +1,45 @@
+---
+import Section from "../ui/Section.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import StepCard from "./StepCard.astro";
+import WhatsAppButton from "../ui/WhatsAppButton.astro";
+import { steps } from "../../utils/constains";
+---
+
+<Section id="como-funciona" class="py-20 md:py-28 bg-light/50 how">
+  <SectionHeading
+    eyebrow="Cómo funciona"
+    title="De la inscripción a la entrega, en 4 pasos."
+    intro="Un proceso simple que tu personal y las familias aprenden en minutos."
+  />
+
+  <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    {steps.map((step) => <StepCard class="step" {...step} />)}
+  </div>
+
+  <div class="mt-12 flex justify-center">
+    <WhatsAppButton
+      size="lg"
+      label="Ver una demo en WhatsApp"
+      message="¡Hola! Quiero ver una demo de iLogs y entender cómo se implementaría en mi escuela."
+    />
+  </div>
+</Section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".step", {
+    opacity: 0,
+    y: 30,
+    duration: 0.5,
+    stagger: 0.12,
+    scrollTrigger: {
+      trigger: ".how",
+      start: "top 70%",
+    },
+  });
+</script>

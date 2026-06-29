@@ -1,19 +1,20 @@
 ---
-import Hero from "../components/Hero.astro";
-import AboutUs from "../components/AboutUs.astro";
-import Benefits from "../components/Benefits.astro";
-import Video from "../components/video.astro";
-import Videotestimonio from "../components/Videotestimonio.astro";
-import CallToAction from "../components/CallToAction.astro";
-
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/home/Hero.astro";
+import Problem from "../components/home/Problem.astro";
+import Benefits from "../components/home/Benefits.astro";
+import HowItWorks from "../components/home/HowItWorks.astro";
+import Showcase from "../components/home/Showcase.astro";
+import Testimonials from "../components/home/Testimonials.astro";
+import FinalCTA from "../components/home/FinalCTA.astro";
 ---
 
 <Layout title="iLogs">
   <Hero />
-  <AboutUs />
+  <Problem />
   <Benefits />
-  <Video />
-  <Videotestimonio />
-  <CallToAction />
+  <HowItWorks />
+  <Showcase />
+  <Testimonials />
+  <FinalCTA />
 </Layout>
