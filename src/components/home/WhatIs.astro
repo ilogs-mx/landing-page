@@ -1,28 +1,128 @@
 ---
 import Section from "../ui/Section.astro";
-import SectionHeading from "../ui/SectionHeading.astro";
-import BenefitCard from "./BenefitCard.astro";
-import { whatIsFeatures } from "../../utils/constains";
+import { Icon } from "astro-icon/components";
+
+/*
+ * Sección "¿Qué es iLogs?".
+ *
+ * Es la primera sección de contenido tras el Hero: entrenched el *qué* es el
+ * producto con un tono emocional y comercial, antes de explicar el *cómo*
+ * (Proceso de entrega) y el *cómo lo adopto* (Implementación).
+ *
+ * Forma:
+ * - 2 columnas. Izquierda: copy aprobado (título, subtítulo con gradiente de
+ *   acento, descripción) + highlighting de los 3 pilares del producto (QR
+ *   dinámico, validación en puerta, notificaciones inmediatas), que son justo
+ *   las promesas que se descomponen en pasos en HowItWorks.
+ * - Derecha: composición editorial autocontenida (sin assets externos) que
+ *   representa el "ticket de salida" del alumno —QR, validación en puerta y
+ *   aviso al tutor— reproduciendo el flujo del producto sin replicar las
+ *   tarjetas de pasos de HowItWorks ni la línea de tiempo de Implementation.
+ *
+ * Copy aprobado; no ampliar promesas que contradigan FAQs/legal.
+ */
+const pillars = [
+  {
+    icon: "qr-code",
+    title: "QR dinámicos",
+    text: "Códigos únicos y de vigencia limitada para cada salida.",
+  },
+  {
+    icon: "tabler:shield-check",
+    title: "Validación en puerta",
+    text: "El personal confirma la autorización en segundos.",
+  },
+  {
+    icon: "tabler:bell-ringing",
+    title: "Notificaciones inmediatas",
+    text: "Escuela y familias saben cada entrega al instante.",
+  },
+];
 ---
 
 <Section id="que-es" class="py-20 md:py-28 what">
-  <SectionHeading
-    eyebrow="¿Qué es iLogs?"
-    title="La plataforma que pone orden y seguridad en la salida de tus alumnos."
-    intro="iLogs es una aplicación para escuelas y familias que digitaliza la entrega de alumnos de principio a fin: sustituye las listas manuales y las llamadas por un código QR dinámico, con vigencia de 24 h, que el personal verifica en segundos en la puerta."
-  />
-
-  <div class="mt-12 grid gap-5 sm:grid-cols-3 what-grid">
+  <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
     {
-      whatIsFeatures.map((feature) => (
-        <BenefitCard
-          title={feature.title}
-          subtitle={feature.subtitle}
-          icon={feature.icon}
-          class="what-card"
-        />
-      ))
+      /* Columna izquierda: copy + pilares de valor.
+         Alineación a la izquierda para diferenciarse del encabezado centrado
+         que usan HowItWorks e Implementation. */
     }
+    <div class="what-copy max-w-xl">
+      <span
+        class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-primary"
+      >
+        ¿Qué es iLogs?
+      </span>
+      <h2
+        class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground"
+      >
+        La plataforma que hace
+        <span class="text-gradient-accent">más segura y tranquila</span>
+        la salida escolar
+      </h2>
+      <p
+        class="mt-5 text-base md:text-lg leading-relaxed text-foreground/70"
+      >
+        iLogs digitaliza la entrega de alumnos con QR dinámicos, validación en
+        puerta y notificaciones inmediatas para escuelas y familias.
+      </p>
+
+      {
+        /* Pilares: refuerzan control, trazabilidad y tranquilidad sin
+           sobreprometer. Iconografía sutil con astro-icon (tabler). */
+      }
+      <ul class="mt-8 space-y-5">
+        {
+          pillars.map((p) => (
+            <li class="what-pillar flex items-start gap-4">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <Icon name={p.icon} class="h-6 w-6" aria-hidden="true" />
+              </span>
+              <span class="flex flex-col">
+                <span class="font-brand text-base md:text-lg text-foreground">
+                  {p.title}
+                </span>
+                <span class="text-sm md:text-base text-foreground/60 leading-relaxed">
+                  {p.text}
+                </span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {
+      /* Columna derecha: imagen de producto (app en el teléfono).
+         Reemplaza la composición editorial autocontenida previa por un
+         asset real que muestra la app en uso, manteniendo la tarjeta de
+         fondo desplazada para dar profundidad sin complicar el diseño. */
+    }
+    <div class="what-visual relative flex justify-center lg:justify-end">
+      {
+        /* Tarjeta de fondo desplazada: aporta profundidad y arrastra el ojo
+           hacia la imagen. Tonalidad cálida de marca. */
+      }
+      <div
+        class="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-primary/15 to-accent-amber/10"
+        aria-hidden="true"
+      >
+      </div>
+
+      {
+        /* Imagen frontal: teléfono con la app iLogs. Contenedor sutil
+           con esquinas redondeadas y sombra para integrarse con la marca. */
+      }
+      <img
+          src="/image/phone-with-app.webp"
+          alt="App iLogs en el teléfono durante la salida escolar"
+          class="block h-auto w-full select-none relative z-10"
+          loading="lazy"
+          decoding="async"
+          width="500"
+          height="500"
+        />
+    </div>
   </div>
 </Section>
 
@@ -32,24 +132,44 @@ import { whatIsFeatures } from "../../utils/constains";
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from(".what-card", {
-    opacity: 0,
-    y: 30,
-    duration: 0.5,
-    stagger: 0.12,
-    scrollTrigger: {
-      trigger: ".what",
-      start: "top 70%",
-    },
-  });
+  // Revelado sutil por scroll, coherente con el resto de secciones.
+  // Se respeta prefers-reduced-motion: en ese caso el contenido queda visible.
+  const mm = gsap.matchMedia();
 
-  gsap.from(".what-player", {
-    opacity: 0,
-    y: 40,
-    duration: 0.7,
-    scrollTrigger: {
-      trigger: ".what-player",
-      start: "top 80%",
-    },
+  mm.add("(prefers-reduced-motion: no-preference)", () => {
+    gsap.from(".what .what-copy > *", {
+      opacity: 0,
+      y: 24,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".what",
+        start: "top 75%",
+      },
+    });
+
+    gsap.from(".what .what-pillar", {
+      opacity: 0,
+      y: 20,
+      duration: 0.4,
+      stagger: 0.12,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".what .what-copy ul",
+        start: "top 85%",
+      },
+    });
+
+    gsap.from(".what .what-ticket", {
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".what .what-visual",
+        start: "top 80%",
+      },
+    });
   });
 </script>

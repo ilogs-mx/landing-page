@@ -1,0 +1,142 @@
+---
+import Section from "../ui/Section.astro";
+import { Icon } from "astro-icon/components";
+
+/*
+ * Sección "Implementación".
+ *
+ * Cronograma de adopción de iLogs en 3 fases (Configuramos → Capacitamos →
+ * Activamos). Se diferencia de "Proceso de entrega" (HowItWorks) en formato:
+ * aquí no hay tarjetas, sino una línea de tiempo —vertical en mobile y
+ * horizontal en desktop— con un nodo por fase.
+ *
+ * Ubicación: después de Testimonios y antes del CTA final. Actúa como
+ * disipador de fricción ("poner en marcha es simple y acompañado") justo
+ * antes del formulario de contacto.
+ *
+ * Datos explícitos en un array local: las fases comparten estructura (icono +
+ * título + descripción), así que mapear es más mantenible que inlinear markup
+ * por fase (a diferencia de HowItWorks, donde cada paso tiene un gráfico
+ * distinto y animación propia).
+ */
+const phases = [
+  {
+    step: "01",
+    title: "Configuramos",
+    description:
+      "Nosotros configuramos iLogs y te acompañamos para cargar la información inicial de tu escuela.",
+    icon: "tabler:settings",
+  },
+  {
+    step: "02",
+    title: "Capacitamos",
+    description:
+      "Damos capacitaciones en línea a personal de TI, docentes y coordinación para facilitar la adopción.",
+    icon: "tabler:school",
+  },
+  {
+    step: "03",
+    title: "Activamos",
+    description:
+      "Invitamos a las familias a registrarse y comenzar a usar la app de forma simple y guiada.",
+    icon: "tabler:users-plus",
+  },
+];
+---
+
+<Section id="implementacion" class="py-20 md:py-28 impl bg-light/50">
+  {
+    /* Encabezado inline (mismo patrón que HowItWorks / Testimonials) para
+       acentuar con gradiente una parte del subtítulo. */
+  }
+  <div class="max-w-3xl text-center mx-auto">
+    <span
+      class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-primary"
+    >
+      Implementación
+    </span>
+    <h2
+      class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground"
+    >
+      Puesta en marcha <span class="text-gradient-accent">simple y acompañada</span>
+    </h2>
+    <p class="mt-4 text-base md:text-lg leading-relaxed text-foreground">
+      Te acompañamos desde la configuración inicial hasta el registro de las
+      familias, con un proceso claro y práctico.
+    </p>
+  </div>
+
+  {
+    /* Cronograma.
+       - Desktop (lg): grid de 3 columnas (sin gap; el espaciado va en cada
+         fase vía px-6) con una línea horizontal continua que une los centros
+         de los nodos primero y último (1/6 y 5/6 del ancho).
+       - Mobile: línea vertical por fase (conector entre un nodo y el
+         siguiente); la última fase no dibuja conector. Los nodos llevan
+         fondo sólido para que la línea quede oculta detrás de ellos. */
+  }
+  <ol
+    class="impl-timeline relative z-0 list-none m-0 p-0 mt-14 md:mt-16 lg:grid lg:grid-cols-3 lg:gap-0"
+  >
+    <span
+      class="hidden lg:block absolute left-[calc(100%/6)] right-[calc(100%/6)] top-8 h-px bg-gradient-to-r from-primary/40 via-accent-amber/40 to-accent-jade/40 z-0"
+      aria-hidden="true"
+    >
+    </span>
+
+    {
+      phases.map((phase, i) => (
+        <li class="impl-phase relative z-10 pl-20 py-5 lg:pl-0 lg:px-6 lg:py-0 lg:text-center">
+          {i < phases.length - 1 && (
+            <span
+              class="impl-connector lg:hidden absolute left-8 top-8 -bottom-8 w-px bg-foreground/15"
+              aria-hidden="true"
+            />
+          )}
+
+          {/* Nodo */}
+          <div class="impl-node absolute left-0 top-0 lg:static lg:mx-auto flex h-16 w-16 items-center justify-center rounded-full border-2 border-primary/30 bg-light text-primary shadow-sm">
+            <Icon name={phase.icon} class="h-7 w-7" aria-hidden="true" />
+          </div>
+
+          {/* Contenido */}
+          <div class="impl-content">
+            <span class="block text-sm font-bold tracking-[0.2em] text-primary/60">
+              {phase.step}
+            </span>
+            <h3 class="mt-1 font-brand text-xl md:text-2xl text-primary">
+              {phase.title}
+            </h3>
+            <p class="mt-2 text-base md:text-lg leading-relaxed text-foreground/70 lg:mx-auto lg:max-w-xs">
+              {phase.description}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Revelado sutil por scroll, coherente con el resto de secciones.
+  // Se respeta prefers-reduced-motion: en ese caso el contenido queda visible.
+  const mm = gsap.matchMedia();
+
+  mm.add("(prefers-reduced-motion: no-preference)", () => {
+    gsap.from(".impl .impl-phase", {
+      opacity: 0,
+      y: 30,
+      duration: 0.5,
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: ".impl-timeline",
+        start: "top 80%",
+      },
+    });
+  });
+</script>
