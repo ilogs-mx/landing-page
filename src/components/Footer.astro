@@ -1,18 +1,91 @@
 ---
+import { Icon } from "astro-icon/components";
+import { buildWhatsAppUrl, socialLinks } from "../utils/contants";
 
+/*
+ * Footer de la landing.
+ *
+ * Decisiones de diseño:
+ * - Fondo primario + texto claro, idéntico al lenguaje visual de la sección
+ *   de contacto (FinalCTA), para sentirse como extensión natural del cierre.
+ * - Sin navegación rápida: solo marca, CTA secundario, redes, legal y
+ *   copyright, según el SSD aprobado.
+ * - Bajo acoplamiento: las redes se renderizan desde `socialLinks` (fuente
+ *   única en utils/contants.ts) y el CTA de WhatsApp reutiliza
+ *   `buildWhatsAppUrl()`.
+ * - El año del copyright se calcula en build para no hardcodearlo.
+ */
+
+const year = new Date().getFullYear();
+
+const legalLinks = [
+  { label: "Aviso de privacidad", href: "/documents/privacy-policy" },
+  { label: "Términos y condiciones", href: "/documents/terms" },
+];
 ---
 
-<footer
-  class="bg-primary bottom-0 w-full py-8 md:py-10"
->
-  <div class="mx-auto max-w-6xl px-5 md:px-8 flex flex-wrap justify-around items-center">
-  <div>
-    <img src="/image/logo.webp" alt="Ilogs" class="w-12 h-12 md:w-20 md:h-20" />
-  </div>
-  <div class="font-brand text-base lg:text-xl hover:text-dark">
-    <a href="/FAQPage">Preguntas Frecuentes</a>
-  </div>
-  <div>
-    <h2 class="text-[8px] sm:text-lg">Copyright 2025</h2></div>
+<footer class="bg-primary w-full text-light">
+  <div class="mx-auto max-w-6xl px-5 md:px-8 py-12 md:py-16">
+    <!-- Bloque superior: marca + CTA secundario -->
+    <div class="grid gap-10 md:gap-12 md:grid-cols-2 md:items-start">
+      <div class="flex flex-col gap-4 max-w-md">
+        <p class="font-brand text-2xl md:text-3xl text-light">iLogs</p>
+        <p class="text-sm md:text-base leading-relaxed text-light/80">
+          Seguridad y orden en cada salida escolar. Digitalizamos la entrega de
+          alumnos con tranquilidad para los padres y eficiencia para tu escuela.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4 md:items-end md:text-right">
+        <p class="text-sm md:text-base text-light/80">
+          ¿Listo para transformar las salidas de tu escuela?
+        </p>
+        <a
+          href={buildWhatsAppUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 self-start md:self-auto border-2 border-light text-light font-bold rounded-xl px-5 py-2.5 transition-colors duration-150 hover:bg-light hover:text-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light"
+        >
+          <Icon name="tabler:brand-whatsapp" class="w-5 h-5" aria-hidden="true" />
+          Escríbenos por WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="mt-10 md:mt-12 flex items-center gap-5">
+      {socialLinks.map(({ name, href, icon: Icon }) => (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={name}
+          class="text-light/80 hover:text-light transition-colors duration-150"
+        >
+          <Icon class="w-6 h-6 fill-current" />
+        </a>
+      ))}
+    </div>
+
+    <hr class="border-light/20 my-8 md:my-10" />
+
+    <!-- Cierre inferior: legal + copyright -->
+    <div
+      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+    >
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm" aria-label="Legal">
+        {legalLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-light/80 hover:text-light underline-offset-4 hover:underline transition-colors duration-150"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <p class="text-xs md:text-sm text-light/70">
+        © {year} iLogs. Todos los derechos reservados.
+      </p>
+    </div>
   </div>
 </footer>

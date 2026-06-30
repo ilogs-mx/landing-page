@@ -1,8 +1,5 @@
 ---
-import Instagram from "../assets/svg/instagram.svg";
-import Facebook from "../assets/svg/facebook.svg";
-import Tiktok from "../assets/svg/tiktok.svg";
-import Linkedin from "../assets/svg/linkedin.svg";
+import { socialLinks } from "../utils/contants";
 ---
 
 <nav
@@ -16,34 +13,17 @@ import Linkedin from "../assets/svg/linkedin.svg";
   />
 
   <div class="flex flex-row p-3 gap-3 items-center">
-    <a
-      href="https://www.linkedin.com/company/ilogs-plataforma/"
-      class="icon w-6 h-6 md:w-10 md:h-10 fill-light justify-center"
-      target="_blank"
-    >
-      <Linkedin/>
-    </a>
-    <a
-      href="https://www.tiktok.com/@ilogs_mx"
-      class="icon w-5 h-5 md:w-7 md:h-7 fill-light"
-      target="_blank"
-    >
-      <Tiktok />
-    </a>
-    <a
-      href="https://www.facebook.com/ilogsmx"
-      class="icon w-6 h-6 md:w-10 md:h-10 fill-light"
-      target="_blank"
-    >
-      <Facebook />
-    </a>
-    <a
-      href="https://www.instagram.com/ilogs_oficial/"
-      class="icon w-6 h-6 md:w-10 md:h-10 fill-light"
-      target="_blank"
-    >
-      <Instagram />
-    </a>
+    {socialLinks.map(({ name, href, icon: Icon, iconClass }) => (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={name}
+        class={`icon fill-light ${iconClass ?? ""}`}
+      >
+        <Icon />
+      </a>
+    ))}
   </div>
   </div>
 </nav>

@@ -1,8 +1,5 @@
 ---
-import Instagram from "./social-networks/Instagram.astro";
-import Facebook from "./social-networks/Facebook.astro";
-import Tiktok from "./social-networks/Tiktok.astro";
-import Linkedin from "./social-networks/Linkedin.astro";
+import { socialLinks } from "../utils/contants";
 ---
 
 <nav class="w-full h-16 bg-primary shadow">
@@ -14,13 +11,17 @@ import Linkedin from "./social-networks/Linkedin.astro";
   />
 
   <div class="flex gap-3">
-    <Linkedin />
-
-    <Tiktok />
-
-    <Facebook />
-
-    <Instagram />
+    {socialLinks.map(({ name, href, icon: Icon, iconClass }) => (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={name}
+        class={`icon fill-light ${iconClass ?? ""}`}
+      >
+        <Icon />
+      </a>
+    ))}
   </div>
   </div>
 </nav>
