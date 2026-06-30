@@ -1,42 +1,165 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/ui/Section.astro";
+import Watermark from "../components/ui/Watermark.astro";
+import WhatsAppButton from "../components/ui/WhatsAppButton.astro";
+import { Icon } from "astro-icon/components";
 import { faqs } from "../utils/faqs";
-import FAQCard from "../components/FAQCard.astro";
-import Title from "../components/Title.astro";
-import Arrowleft from "../assets/svg/arrowleft.svg";
+
+/*
+ * Página de Preguntas Frecuentes.
+ *
+ * Homologación con la home:
+ *  - Encabezado editorial (eyebrow + título con acento de gradiente + intro)
+ *    idéntico en patrón al de HowItWorks / Implementation.
+ *  - Cromado de tarjetas (rounded-3xl + border-primary/20 + bg-light/60 +
+ *    hover:shadow-lg) tomado de las `step` de HowItWorks.
+ *  - Marca de agua Tabler sutil (`Watermark` con tone="primary") detrás del
+ *    contenido, en z-0; solo una visible en mobile para no competir.
+ *  - Animación de entrada vía `revealOnScroll` (sistema unificado de entrance),
+ *    reemplazando el `gsap.from(".faq-page")` legacy que animaba el contenedor.
+ *  - Navegación de regreso: el navbar fijo ya expone logo → "/" y enlaces a
+ *    secciones, así que se elimina el `arrowleft.svg` flotante (legacy); el
+ *    CTA inferior ofrece un puente por WhatsApp si no se halla la respuesta.
+ *
+ * Listado: accordion nativo con <details>/<summary> sobre un grid de 2 columnas
+ * en sm+. Permite escanear solo las preguntas y abrir las relevantes, sin JS
+ * ni colisiones con reduced-motion. El icono Tabler chevron rota al abrir.
+ * Se preserva el campo `number` de los datos como badge dentro del summary.
+ */
 ---
 
-<Layout title="Preguntas-Frecuentes">
-  <Section class="pt-20 mb-5 sm:mb-10">
-    <div class="faq-page relative  flex items-center justify-center mb-4 sm:mb-10">
-      <a href="/" class="absolute left-0 lg:left-4 fill-primary hover:fill-primary"
-        ><Arrowleft class="w-8 h-8 sm:w-12 sm:h-12" /></a
-      >
-      <Title title="Preguntas Frecuentes" />
+<Layout title="Preguntas Frecuentes — iLogs">
+  <Section class="pt-24 md:pt-32 pb-20 md:pb-28 faq relative overflow-hidden">
+    {
+      /* Marcas de agua decorativas (Tabler), sutiles sobre fondo claro
+         (text-primary/30). Una visible en mobile, dos en desktop para no
+         competir con el copy centrado ni con las tarjetas. */
+    }
+    <div class="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+      <Watermark
+        name="tabler:help-circle"
+        tone="primary"
+        class="absolute top-10 right-2 md:top-16 md:right-10 w-24 h-24 md:w-36 md:h-36 rotate-12"
+      />
+      <Watermark
+        name="tabler:bulb"
+        tone="primary"
+        class="absolute bottom-10 left-2 md:bottom-16 md:left-10 w-24 h-24 md:w-32 md:h-32 -rotate-6 hidden md:block"
+      />
     </div>
-    <div class="faq-page  lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-10">
-      {
-        faqs.map((faq) => (
-          <FAQCard
-            question={faq.question}
-            answer={faq.answer}
-            number={faq.number}
-          />
-        ))
-      }
+
+    {
+      /* Encabezado editorial, mismo patrón que HowItWorks / Implementation:
+         eyebrow uppercase + tracking, título brand con fragmento en gradiente,
+         intro muted a 70%. Centrado y acotado a max-w-3xl. */
+    }
+    <div class="faq-head max-w-3xl text-center mx-auto relative z-10">
+      <span
+        class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-primary"
+      >
+        Centro de ayuda
+      </span>
+      <h1
+        class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground"
+      >
+        Preguntas <span class="text-gradient-accent">frecuentes</span>
+      </h1>
+      <p class="mt-4 text-base md:text-lg leading-relaxed text-foreground/70">
+        Respuestas claras sobre seguridad, el uso de la app y los planes de
+        iLogs para tu escuela.
+      </p>
+    </div>
+
+    {
+      /* Listado de FAQs: accordion nativo (<details>/<summary>) en grid de 2
+         columnas en sm+. Cromado heredado de las tarjetas de HowItWorks.
+         `group` + `group-open:` gira el chevron al expandir; `marker-info`
+         para ocultar el triángulo por defecto de <summary> en WebKit. */
+    }
+    <div
+      class="faq-list faq-grid relative z-10 mt-12 md:mt-16 grid gap-4 md:gap-5 sm:grid-cols-2 lg:gap-x-6 lg:gap-y-5"
+    >
+      {faqs.map((faq) => (
+        <details
+          class="faq-item group rounded-3xl border border-primary/20 bg-light/60 p-5 md:p-6 transition-shadow duration-200 open:shadow-md hover:shadow-md"
+        >
+          <summary
+            class="faq-q faq-summary flex items-start gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden"
+          >
+            <span class="faq-num flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 font-brand text-base text-primary">
+              {faq.number}
+            </span>
+            <span class="faq-q-text font-brand text-base md:text-lg leading-snug text-foreground pt-1">
+              {faq.question.trim()}
+            </span>
+            <Icon
+              name="tabler:chevron-down"
+              class="faq-chevron ml-auto h-5 w-5 shrink-0 text-primary/70 transition-transform duration-200 group-open:rotate-180 mt-1.5"
+              aria-hidden="true"
+            />
+          </summary>
+          <p class="faq-a faq-answer mt-4 pl-13 text-sm md:text-base leading-relaxed text-foreground/70">
+            {faq.answer.trim()}
+          </p>
+        </details>
+      ))}
+    </div>
+
+    {
+      /* Puente de contacto: si la FAQ no resuelve, ofrecer salida por
+         WhatsApp coherente con el CTA de la home. Lenguaje sobrio. */
+    }
+    <div class="faq-cta max-w-2xl text-center mx-auto mt-14 md:mt-20 relative z-10">
+      <span
+        class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-primary"
+      >
+        ¿No está tu duda aquí?
+      </span>
+      <h2
+        class="font-brand text-2xl md:text-3xl leading-tight text-foreground"
+      >
+        Escríbenos y te <span class="text-gradient-accent">resolvemos</span>
+      </h2>
+      <p class="mt-3 text-sm md:text-base text-foreground/70">
+        Si necesitas un detalle concreto de tu escuela, el equipo te responde
+        por WhatsApp.
+      </p>
+      <div class="mt-6 flex justify-center">
+        <WhatsAppButton
+          size="lg"
+          message="¡Hola! Tengo una duda sobre iLogs que no está en las preguntas frecuentes."
+          label="Hablar con el equipo"
+          variant="primary"
+        />
+      </div>
     </div>
   </Section>
+
   <script>
-    import { gsap } from "gsap";
+    import { revealOnScroll } from "../scripts/entrance";
 
+    // Revelado por scroll unificado (ver entrance.ts).
+    // Encabezado: stagger corto sobre eyebrow, título e intro.
+    revealOnScroll(".faq .faq-head > *", {
+      trigger: ".faq .faq-head",
+      start: "top 80%",
+      stagger: 0.08,
+    });
 
-    gsap.from(".faq-page", {
-      opacity: 0,
-      y: 100,
-      stagger: 0.25,
-      duration: 0.5,
-      delay: 0.3,
+    // Tarjetas/acordeones: entran con y suave y stagger para no caer de golpe.
+    revealOnScroll(".faq .faq-item", {
+      trigger: ".faq .faq-list",
+      start: "top 80%",
+      y: 24,
+      stagger: 0.06,
+    });
+
+    // CTA inferior: reveal discreto, mismo patrón base.
+    revealOnScroll(".faq .faq-cta > *", {
+      trigger: ".faq .faq-cta",
+      start: "top 85%",
+      stagger: 0.1,
     });
   </script>
 </Layout>
