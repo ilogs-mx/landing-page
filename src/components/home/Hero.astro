@@ -78,24 +78,9 @@ import Watermark from "../ui/Watermark.astro";
 </section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { revealNow } from "../../scripts/entrance";
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from(".hero-text > *", {
-    y: 24,
-    opacity: 0,
-    duration: 0.5,
-    stagger: 0.08,
-    ease: "power3.out",
-  });
-
-  gsap.from(".hero-image", {
-    y: 60,
-    opacity: 0,
-    duration: 0.7,
-    ease: "power3.out",
-    delay: 0.2,
-  });
+  // Hero: reveal inicial inmediato, sin ScrollTrigger (ver entrance.ts).
+  // Stagger corto sobre los elementos del copy; respeta prefers-reduced-motion.
+  revealNow(".hero-text > *", { y: 24, stagger: 0.08 });
 </script>

@@ -154,27 +154,20 @@ const thumbnail = "/image/banner-ilogs.webp";
 
 <script>
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { revealOnScroll } from "../../scripts/entrance";
 
-  gsap.registerPlugin(ScrollTrigger);
+  // Entrada de las tarjetas por scroll, patrón unificado (ver entrance.ts).
+  revealOnScroll(".how .step", {
+    trigger: ".how",
+    start: "top 70%",
+    y: 24,
+    stagger: 0.12,
+  });
 
-  // Solo animamos cuando el usuario no pide movimiento reducido.
-  const mm = gsap.matchMedia();
-
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    // Entrada por scroll de las tarjetas.
-    gsap.from(".how .step", {
-      opacity: 0,
-      y: 30,
-      duration: 0.5,
-      stagger: 0.12,
-      scrollTrigger: {
-        trigger: ".how",
-        start: "top 70%",
-      },
-    });
-
-    // Microanimaciones en loop por paso, con delays en cascada.
+  // Microanimaciones en loop, significativas para cada paso:
+  // QR pulsando, línea de scan, campana notificando. Se conservan
+  // porque aportan narration del producto; se respetan reduced-motion.
+  gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
     // Pulso del QR (paso 1).
     gsap.to('.how [data-anim="pulse"] .hiw-qr', {
       scale: 1.06,
@@ -203,13 +196,12 @@ const thumbnail = "/image/banner-ilogs.webp";
       transformOrigin: "top center",
     });
 
-    const bellShake = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 1.6,
-      defaults: { ease: "sine.out" },
-    });
-
-    bellShake
+    gsap
+      .timeline({
+        repeat: -1,
+        repeatDelay: 1.6,
+        defaults: { ease: "sine.out" },
+      })
       // Tire rápido a la derecha
       .fromTo(
         '.how [data-anim="bell"] .hiw-bell',

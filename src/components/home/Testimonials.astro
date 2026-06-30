@@ -62,7 +62,7 @@ const testimonials = [
     /* Encabezado: acento con gradiente en parte del subtítulo,
        mismo patrón que HowItWorks. */
   }
-  <div class="max-w-3xl text-center mx-auto relative z-10">
+  <div class="max-w-3xl text-center mx-auto relative z-10 testimonials-head">
     <span
       class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-primary"
     >
@@ -137,6 +137,22 @@ const testimonials = [
 </Section>
 
 <script>
+  import { revealOnScroll } from "../../scripts/entrance";
+
+  // Entrada por scroll uniforme: encabezado + tabs. Patrón coherente con
+  // el resto de secciones; respeta prefers-reduced-motion.
+  revealOnScroll(".testimonials-section .testimonials-head", {
+    trigger: ".testimonials-section",
+    start: "top 75%",
+  });
+
+  revealOnScroll(".testimonials-section .testimonials-tab", {
+    trigger: ".testimonials-section",
+    start: "top 70%",
+    stagger: 0.08,
+    y: 14,
+  });
+
   // Conmuta entre testimonios: actualiza visibilidad de paneles y estado de
   // los botones. Al ocultar un panel, detiene su video (si estaba reproduciendo)
   // para que no suene en background.

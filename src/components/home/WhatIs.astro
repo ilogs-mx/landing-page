@@ -145,49 +145,27 @@ const pillars = [
 </Section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { revealOnScroll } from "../../scripts/entrance";
 
-  gsap.registerPlugin(ScrollTrigger);
+  // Revelado por scroll uniforme (ver entrance.ts). Las dos columnas
+  // entran con el mismo patrón (fade + y) y stagger solo en listas.
+  revealOnScroll(".what .what-copy > *", {
+    trigger: ".what",
+    start: "top 75%",
+    stagger: 0.08,
+  });
 
-  // Revelado sutil por scroll, coherente con el resto de secciones.
-  // Se respeta prefers-reduced-motion: en ese caso el contenido queda visible.
-  const mm = gsap.matchMedia();
+  revealOnScroll(".what .what-pillar", {
+    trigger: ".what .what-copy ul",
+    start: "top 85%",
+    stagger: 0.12,
+  });
 
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    gsap.from(".what .what-copy > *", {
-      opacity: 0,
-      y: 24,
-      duration: 0.5,
-      stagger: 0.08,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".what",
-        start: "top 75%",
-      },
-    });
-
-    gsap.from(".what .what-pillar", {
-      opacity: 0,
-      y: 20,
-      duration: 0.4,
-      stagger: 0.12,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".what .what-copy ul",
-        start: "top 85%",
-      },
-    });
-
-    gsap.from(".what .what-ticket", {
-      opacity: 0,
-      y: 40,
-      duration: 0.6,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".what .what-visual",
-        start: "top 80%",
-      },
-    });
+  // Visual: target real (.what-visual <img>). El selector previo
+  // ".what-ticket" ya no existía en el DOM y producía un animation no-op.
+  revealOnScroll(".what .what-visual img", {
+    trigger: ".what .what-visual",
+    start: "top 80%",
+    y: 32,
   });
 </script>

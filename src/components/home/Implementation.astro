@@ -132,25 +132,13 @@ const phases = [
 </Section>
 
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { revealOnScroll } from "../../scripts/entrance";
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Revelado sutil por scroll, coherente con el resto de secciones.
-  // Se respeta prefers-reduced-motion: en ese caso el contenido queda visible.
-  const mm = gsap.matchMedia();
-
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    gsap.from(".impl .impl-phase", {
-      opacity: 0,
-      y: 30,
-      duration: 0.5,
-      stagger: 0.15,
-      scrollTrigger: {
-        trigger: ".impl-timeline",
-        start: "top 80%",
-      },
-    });
+  // Revelado por scroll uniforme sobre las fases del cronograma.
+  revealOnScroll(".impl .impl-phase", {
+    trigger: ".impl-timeline",
+    start: "top 80%",
+    y: 24,
+    stagger: 0.15,
   });
 </script>

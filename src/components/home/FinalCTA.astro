@@ -96,7 +96,7 @@ import { Icon } from "astro-icon/components";
       }
       <form
         id="contactForm"
-        class="mt-10 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 fade-in"
+        class="mt-10 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         <div>
           <label for="fName" class="block text-sm font-bold text-light mb-2">
@@ -296,6 +296,21 @@ import { Icon } from "astro-icon/components";
 
 <script>
   import { apiWhatsApp, munyaalPhone } from "../../utils/contants";
+  import { revealOnScroll } from "../../scripts/entrance";
+
+  // CTA final: reveal sobrio del intro + formulario por scroll (animación
+  // uniforme con el resto de secciones). El formulario entra como bloque
+  // (sin stagger por campo) para mantenerla sobria.
+  revealOnScroll(".final-cta .max-w-3xl", {
+    trigger: ".final-cta",
+    start: "top 70%",
+  });
+
+  revealOnScroll("#contactForm", {
+    trigger: "#contactForm",
+    start: "top 85%",
+    y: 16,
+  });
 
   const roleField = document.getElementById("fRole") as HTMLSelectElement;
   roleField?.addEventListener("change", (event: Event) => {
