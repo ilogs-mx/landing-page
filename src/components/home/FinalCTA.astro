@@ -1,40 +1,55 @@
 ---
 import Section from "../ui/Section.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
-import WhatsAppButton from "../ui/WhatsAppButton.astro";
-import Book from "../../assets/svg/book.svg";
-import Mochila from "../../assets/svg/icon-mochila.svg";
-import Airplane from "../../assets/svg/airplane.svg";
+import { Icon } from "astro-icon/components";
+
+/*
+ * Sección final de conversión.
+ *
+ * Decisiones de diseño:
+ * - Fondo primario conservado, sin transición superior: la sección arranca
+ *   de forma directa tras la anterior.
+ * - Un único CTA: el botón de envío del formulario. Se elimina el botón
+ *   superior de WhatsApp para evitar competir por la atención.
+ * - El formulario se integra directamente sobre el fondo primario, sin tarjeta
+ *   blanca contenedora. Las etiquetas pasan a claro para contrastar sobre el
+ *   primario; los campos conservan superficie clara para máxima legibilidad.
+ * - Botón final outline sobre primario (texto "Contactar ahora"), coherente con
+ *   el lenguaje de botones de la landing (ver WhatsAppButton / Hero).
+ * - Iconografía Tabler discreta: una marca de agua tenue y una fila de
+ *   refuerzos de confianza. Nada recargado.
+ */
 ---
 
 <Section
   id="contact-section"
-  class="final-cta py-20 md:py-28 bg-primary rounded-t-[2.5rem] -mt-6 relative overflow-hidden"
+  class="final-cta bg-primary pt-20 md:pt-28 pb-20 md:pb-28 relative overflow-hidden"
 >
-  <div class="relative z-20 flex flex-col items-center">
-    <SectionHeading
-      light
-      eyebrow="Hablemos"
-      title="Agenda tu demo gratuita por WhatsApp."
-      intro="Cuéntanos sobre tu escuela y te mostramos iLogs en acción. Sin compromiso."
-    />
-
-    <div class="mt-6 flex justify-center">
-      <WhatsAppButton
-        size="lg"
-        variant="light"
-        label="Escribimos ahora por WhatsApp"
-        message="¡Hola! Quiero agendar una demo gratuita de iLogs para mi escuela."
-      />
+  <div class="relative z-10 flex flex-col items-center">
+    <div class="max-w-3xl text-center mx-auto">
+      <span
+        class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-light/80"
+      >
+        Hablemos
+      </span>
+      <h2
+        class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-light"
+      >
+        Agenda tu demo gratuita por WhatsApp.
+      </h2>
+      <p class="mt-4 text-base md:text-lg leading-relaxed text-light">
+        Cuéntanos sobre tu escuela y te mostramos iLogs en acción. Sin
+        compromiso.
+      </p>
     </div>
 
-    <p class="mt-4 text-center text-sm text-light/70">
-      O déjanos tus datos y te contactamos:
-    </p>
-
+    {
+      /* Formulario integrado directamente sobre el fondo primario, sin tarjeta
+          contenedora. Centrado y acotado en ancho para mantener el skyline. */
+    }
     <form
       id="contactForm"
-      class="mt-6 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 fade-in"
+      class="mt-10 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 fade-in"
     >
       <div>
         <label for="fName" class="block text-sm font-bold text-light mb-2">
@@ -46,7 +61,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           name="fName"
           id="fName"
           placeholder="Ej. Juan Pérez"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         />
       </div>
       <div>
@@ -59,7 +74,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           name="fPhone"
           id="fPhone"
           placeholder="Ej. 123 456 7890"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         />
       </div>
       <div>
@@ -72,7 +87,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           id="fMail"
           placeholder="Ej. ejemplo@dominio.com"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         />
       </div>
       <div>
@@ -85,7 +100,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           name="fSchool"
           id="fSchool"
           placeholder="Ej. Escuela Secundaria ABC"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         />
       </div>
       <div>
@@ -97,7 +112,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           name="fState"
           id="fState"
           placeholder="Ej. Quintana Roo"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         />
       </div>
       <div>
@@ -110,7 +125,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           name="fCity"
           id="fCity"
           placeholder="Ej. Playa del Carmen"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         />
       </div>
       <div>
@@ -121,13 +136,15 @@ import Airplane from "../../assets/svg/airplane.svg";
           required
           name="fRole"
           id="fRole"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         >
           <option value="" selected disabled hidden>Selecciona aquí</option>
           <option value="Padre/Madre/Tutor">Padre / Madre / Tutor</option>
           <option value="Director(a)">Director(a)</option>
           <option value="Coordinador(a)">Coordinador(a)</option>
-          <option value="Personal administrativo">Personal administrativo</option>
+          <option value="Personal administrativo"
+            >Personal administrativo</option
+          >
         </select>
       </div>
       <div>
@@ -138,7 +155,7 @@ import Airplane from "../../assets/svg/airplane.svg";
           required
           name="fStudents"
           id="fStudents"
-          class="w-full rounded-xl border border-light/40 bg-light py-2.5 px-4 text-base text-dark outline-none focus:border-light focus:shadow-md"
+          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
         >
           <option value="" selected disabled hidden>Selecciona aquí</option>
           <option value="Menos de 100">Menos de 100</option>
@@ -160,9 +177,11 @@ import Airplane from "../../assets/svg/airplane.svg";
                 id="security"
                 name="fSecurity"
                 value="Seguridad en salidas escolares"
-                class="h-5 w-5 rounded-md accent-light"
+                class="h-5 w-5 rounded-md accent-primary"
               />
-              <label for="security">Seguridad en salidas</label>
+              <label for="security" class="text-light"
+                >Seguridad en salidas</label
+              >
             </div>
             <div class="flex items-center gap-2">
               <input
@@ -170,9 +189,11 @@ import Airplane from "../../assets/svg/airplane.svg";
                 id="digitalization"
                 name="fDigitalization"
                 value="Digitalizar el proceso de salida"
-                class="h-5 w-5 rounded-md accent-light"
+                class="h-5 w-5 rounded-md accent-primary"
               />
-              <label for="digitalization">Digitalizar la salida</label>
+              <label for="digitalization" class="text-light"
+                >Digitalizar la salida</label
+              >
             </div>
             <div class="flex items-center gap-2">
               <input
@@ -180,9 +201,11 @@ import Airplane from "../../assets/svg/airplane.svg";
                 id="monitoring"
                 name="fMonitoring"
                 value="Gestión de permisos para salidas o eventos"
-                class="h-5 w-5 rounded-md accent-light"
+                class="h-5 w-5 rounded-md accent-primary"
               />
-              <label for="monitoring">Permisos para salidas</label>
+              <label for="monitoring" class="text-light"
+                >Permisos para salidas</label
+              >
             </div>
             <div class="flex items-center gap-2">
               <input
@@ -190,9 +213,11 @@ import Airplane from "../../assets/svg/airplane.svg";
                 id="efficiency"
                 name="fEfficiency"
                 value="Agilizar el proceso de entrega"
-                class="h-5 w-5 rounded-md accent-light"
+                class="h-5 w-5 rounded-md accent-primary"
               />
-              <label for="efficiency">Agilizar la entrega</label>
+              <label for="efficiency" class="text-light"
+                >Agilizar la entrega</label
+              >
             </div>
           </div>
         </fieldset>
@@ -200,27 +225,18 @@ import Airplane from "../../assets/svg/airplane.svg";
 
       <button
         type="submit"
-        class="col-span-1 md:col-span-2 bg-dark text-light font-bold rounded-xl cursor-pointer py-3 text-lg shadow-lg hover:scale-[1.02] transition-transform"
+        class="col-span-1 md:col-span-2 inline-flex items-center justify-center gap-2 border-2 border-light text-light font-bold rounded-xl cursor-pointer py-3 text-lg transition-colors duration-150 hover:bg-light hover:text-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light active:scale-[0.98]"
       >
-        Enviar por WhatsApp
+        <Icon name="tabler:brand-whatsapp" class="w-5 h-5" aria-hidden="true" />
+        Contactar ahora
       </button>
     </form>
 
     <p class="mt-4 text-center text-xs text-light/70 max-w-md">
-      Al enviar, abrirás WhatsApp con tus datos precargados para que nos escribas
-      directamente.
+      Al enviar, abrirás WhatsApp con tus datos precargados para que nos
+      escribas directamente.
     </p>
   </div>
-
-  <Book
-    class="absolute z-10 -rotate-30 w-24 md:w-40 left-0 md:left-8 top-8 opacity-80"
-  />
-  <Mochila
-    class="absolute z-10 rotate-12 w-20 md:w-40 right-0 md:right-8 top-6 opacity-80"
-  />
-  <Airplane
-    class="absolute z-10 w-32 md:w-48 right-4 md:right-12 bottom-2 opacity-80"
-  />
 </Section>
 
 <script>
@@ -230,7 +246,7 @@ import Airplane from "../../assets/svg/airplane.svg";
   roleField?.addEventListener("change", (event: Event) => {
     const target = event.target as HTMLSelectElement;
     const studentsField = document.getElementById(
-      "fStudents"
+      "fStudents",
     ) as HTMLSelectElement;
     if (target.value === "Padre/Madre/Tutor") {
       studentsField.value = "No aplica / No sé";
