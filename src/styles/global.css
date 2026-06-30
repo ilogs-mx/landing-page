@@ -40,3 +40,24 @@
   background-clip: text;
   color: transparent;
 }
+
+/*
+ * Navegación por anclas del navbar.
+ * - scroll-behavior: smooth para transición suave al saltar a una sección.
+ * - scroll-margin-top en las secciones con id para que el navbar fixed
+ *   (h-16 = 4rem) no tape el inicio del contenido al navegar.
+ * Se respeta prefers-reduced-motion.
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}

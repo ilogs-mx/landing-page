@@ -7,8 +7,13 @@ import { Icon } from "astro-icon/components";
  * Sección final de conversión.
  *
  * Decisiones de diseño:
- * - Fondo primario conservado, sin transición superior: la sección arranca
- *   de forma directa tras la anterior.
+ * - Curva orgánica superior que replica (espejada verticalmente) la onda
+ *   inferior del Hero: mismos paths, misma altura y misma disposición de
+ *   capas (onda posterior fill-primary + onda frontal fill-background).
+ *   Se invierte con -scale-y-100 para que la franja background quede arriba
+ *   y dialogue con el fondo de la página, bajando hacia el primary de la
+ *   sección. Estructura idéntica a Hero: <section> cruda + SVG hermano +
+ *   <Section> interno (full-bleed).
  * - Un único CTA: el botón de envío del formulario. Se elimina el botón
  *   superior de WhatsApp para evitar competir por la atención.
  * - El formulario se integra directamente sobre el fondo primario, sin tarjeta
@@ -21,223 +26,255 @@ import { Icon } from "astro-icon/components";
  */
 ---
 
-<Section
-  id="contact-section"
-  class="final-cta bg-primary pt-20 md:pt-28 pb-20 md:pb-28 relative overflow-hidden"
->
-  <div class="relative z-10 flex flex-col items-center">
-    <div class="max-w-3xl text-center mx-auto">
-      <span
-        class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-light/80"
+<section class="final-cta bg-primary relative overflow-hidden">
+  {
+    /* Curva orgánica superior: espejo vertical de la onda inferior del Hero.
+       Mismos paths, viewBox, capas (fill-primary detrás / fill-background
+       delante) y alturas (h-[70px] sm:h-[80px] md:h-auto). Se invierte con
+       -scale-y-100 para que la onda background quede arriba y baje hacia el
+       primary de la sección, replicando "en espejo" la transición del Hero. */
+  }
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1440 160"
+    class="block w-full relative z-0 h-[70px] sm:h-[80px] md:h-auto -scale-y-100"
+    aria-hidden="true"
+    preserveAspectRatio="none"
+  >
+    <!-- Capa posterior: onda primary que asoma por encima de la onda clara -->
+    <path
+      class="fill-primary"
+      d="M0,160 L0,70 C180,140 360,10 540,60 C720,110 900,20 1080,62 C1260,98 1380,52 1440,46 L1440,160 Z"
+    ></path>
+    <!-- Capa frontal: onda background que empalma con el fondo de la página -->
+    <path
+      class="fill-background"
+      d="M0,160 L0,112 C200,150 380,78 540,100 C720,122 900,74 1080,98 C1260,118 1380,86 1440,92 L1440,160 Z"
+    ></path>
+  </svg>
+
+  <Section class="pt-14 md:pt-16 pb-20 md:pb-28" id="contact-section">
+    <div class="relative z-10 flex flex-col items-center">
+      <div class="max-w-3xl text-center mx-auto">
+        <span
+          class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-light/80"
+        >
+          Hablemos
+        </span>
+        <h2
+          class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-light"
+        >
+          Agenda tu demo gratuita por WhatsApp.
+        </h2>
+        <p class="mt-4 text-base md:text-lg leading-relaxed text-light">
+          Cuéntanos sobre tu escuela y te mostramos iLogs en acción. Sin
+          compromiso.
+        </p>
+      </div>
+
+      {
+        /* Formulario integrado directamente sobre el fondo primario, sin tarjeta
+          contenedora. Centrado y acotado en ancho para mantener el skyline. */
+      }
+      <form
+        id="contactForm"
+        class="mt-10 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 fade-in"
       >
-        Hablemos
-      </span>
-      <h2
-        class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-light"
-      >
-        Agenda tu demo gratuita por WhatsApp.
-      </h2>
-      <p class="mt-4 text-base md:text-lg leading-relaxed text-light">
-        Cuéntanos sobre tu escuela y te mostramos iLogs en acción. Sin
-        compromiso.
+        <div>
+          <label for="fName" class="block text-sm font-bold text-light mb-2">
+            Nombre completo
+          </label>
+          <input
+            required
+            type="text"
+            name="fName"
+            id="fName"
+            placeholder="Ej. Juan Pérez"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <div>
+          <label for="fPhone" class="block text-sm font-bold text-light mb-2">
+            Teléfono
+          </label>
+          <input
+            required
+            type="tel"
+            name="fPhone"
+            id="fPhone"
+            placeholder="Ej. 123 456 7890"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <div>
+          <label for="fMail" class="block text-sm font-bold text-light mb-2">
+            Correo electrónico
+          </label>
+          <input
+            type="email"
+            name="fMail"
+            id="fMail"
+            placeholder="Ej. ejemplo@dominio.com"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <div>
+          <label for="fSchool" class="block text-sm font-bold text-light mb-2">
+            Escuela / institución
+          </label>
+          <input
+            required
+            type="text"
+            name="fSchool"
+            id="fSchool"
+            placeholder="Ej. Escuela Secundaria ABC"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <div>
+          <label for="fState" class="block text-sm font-bold text-light mb-2">
+            Estado
+          </label>
+          <input
+            type="text"
+            name="fState"
+            id="fState"
+            placeholder="Ej. Quintana Roo"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <div>
+          <label for="fCity" class="block text-sm font-bold text-light mb-2">
+            Ciudad
+          </label>
+          <input
+            required
+            type="text"
+            name="fCity"
+            id="fCity"
+            placeholder="Ej. Playa del Carmen"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          />
+        </div>
+        <div>
+          <label for="fRole" class="block text-sm font-bold text-light mb-2">
+            ¿Cuál es tu rol?
+          </label>
+          <select
+            required
+            name="fRole"
+            id="fRole"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          >
+            <option value="" selected disabled hidden>Selecciona aquí</option>
+            <option value="Padre/Madre/Tutor">Padre / Madre / Tutor</option>
+            <option value="Director(a)">Director(a)</option>
+            <option value="Coordinador(a)">Coordinador(a)</option>
+            <option value="Personal administrativo"
+              >Personal administrativo</option
+            >
+          </select>
+        </div>
+        <div>
+          <label
+            for="fStudents"
+            class="block text-sm font-bold text-light mb-2"
+          >
+            ¿Cuántos alumnos?
+          </label>
+          <select
+            required
+            name="fStudents"
+            id="fStudents"
+            class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
+          >
+            <option value="" selected disabled hidden>Selecciona aquí</option>
+            <option value="Menos de 100">Menos de 100</option>
+            <option value="100 – 300">100 – 300</option>
+            <option value="Más de 300">Más de 300</option>
+            <option value="No aplica / No sé">No aplica / No sé</option>
+          </select>
+        </div>
+
+        <div class="col-span-1 md:col-span-2">
+          <fieldset>
+            <legend class="block text-sm font-bold text-light mb-2">
+              ¿Qué te gustaría mejorar con iLogs?
+            </legend>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="security"
+                  name="fSecurity"
+                  value="Seguridad en salidas escolares"
+                  class="h-5 w-5 rounded-md accent-primary"
+                />
+                <label for="security" class="text-light"
+                  >Seguridad en salidas</label
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="digitalization"
+                  name="fDigitalization"
+                  value="Digitalizar el proceso de salida"
+                  class="h-5 w-5 rounded-md accent-primary"
+                />
+                <label for="digitalization" class="text-light"
+                  >Digitalizar la salida</label
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="monitoring"
+                  name="fMonitoring"
+                  value="Gestión de permisos para salidas o eventos"
+                  class="h-5 w-5 rounded-md accent-primary"
+                />
+                <label for="monitoring" class="text-light"
+                  >Permisos para salidas</label
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="efficiency"
+                  name="fEfficiency"
+                  value="Agilizar el proceso de entrega"
+                  class="h-5 w-5 rounded-md accent-primary"
+                />
+                <label for="efficiency" class="text-light"
+                  >Agilizar la entrega</label
+                >
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <button
+          type="submit"
+          class="col-span-1 md:col-span-2 inline-flex items-center justify-center gap-2 border-2 border-light text-light font-bold rounded-xl cursor-pointer py-3 text-lg transition-colors duration-150 hover:bg-light hover:text-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light active:scale-[0.98]"
+        >
+          <Icon
+            name="tabler:brand-whatsapp"
+            class="w-5 h-5"
+            aria-hidden="true"
+          />
+          Contactar ahora
+        </button>
+      </form>
+
+      <p class="mt-4 text-center text-xs text-light/70 max-w-md">
+        Al enviar, abrirás WhatsApp con tus datos precargados para que nos
+        escribas directamente.
       </p>
     </div>
-
-    {
-      /* Formulario integrado directamente sobre el fondo primario, sin tarjeta
-          contenedora. Centrado y acotado en ancho para mantener el skyline. */
-    }
-    <form
-      id="contactForm"
-      class="mt-10 w-full max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-4 fade-in"
-    >
-      <div>
-        <label for="fName" class="block text-sm font-bold text-light mb-2">
-          Nombre completo
-        </label>
-        <input
-          required
-          type="text"
-          name="fName"
-          id="fName"
-          placeholder="Ej. Juan Pérez"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        />
-      </div>
-      <div>
-        <label for="fPhone" class="block text-sm font-bold text-light mb-2">
-          Teléfono
-        </label>
-        <input
-          required
-          type="tel"
-          name="fPhone"
-          id="fPhone"
-          placeholder="Ej. 123 456 7890"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        />
-      </div>
-      <div>
-        <label for="fMail" class="block text-sm font-bold text-light mb-2">
-          Correo electrónico
-        </label>
-        <input
-          type="email"
-          name="fMail"
-          id="fMail"
-          placeholder="Ej. ejemplo@dominio.com"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        />
-      </div>
-      <div>
-        <label for="fSchool" class="block text-sm font-bold text-light mb-2">
-          Escuela / institución
-        </label>
-        <input
-          required
-          type="text"
-          name="fSchool"
-          id="fSchool"
-          placeholder="Ej. Escuela Secundaria ABC"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        />
-      </div>
-      <div>
-        <label for="fState" class="block text-sm font-bold text-light mb-2">
-          Estado
-        </label>
-        <input
-          type="text"
-          name="fState"
-          id="fState"
-          placeholder="Ej. Quintana Roo"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        />
-      </div>
-      <div>
-        <label for="fCity" class="block text-sm font-bold text-light mb-2">
-          Ciudad
-        </label>
-        <input
-          required
-          type="text"
-          name="fCity"
-          id="fCity"
-          placeholder="Ej. Playa del Carmen"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        />
-      </div>
-      <div>
-        <label for="fRole" class="block text-sm font-bold text-light mb-2">
-          ¿Cuál es tu rol?
-        </label>
-        <select
-          required
-          name="fRole"
-          id="fRole"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        >
-          <option value="" selected disabled hidden>Selecciona aquí</option>
-          <option value="Padre/Madre/Tutor">Padre / Madre / Tutor</option>
-          <option value="Director(a)">Director(a)</option>
-          <option value="Coordinador(a)">Coordinador(a)</option>
-          <option value="Personal administrativo"
-            >Personal administrativo</option
-          >
-        </select>
-      </div>
-      <div>
-        <label for="fStudents" class="block text-sm font-bold text-light mb-2">
-          ¿Cuántos alumnos?
-        </label>
-        <select
-          required
-          name="fStudents"
-          id="fStudents"
-          class="w-full rounded-xl border border-foreground/10 bg-light py-2.5 px-4 text-base text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-        >
-          <option value="" selected disabled hidden>Selecciona aquí</option>
-          <option value="Menos de 100">Menos de 100</option>
-          <option value="100 – 300">100 – 300</option>
-          <option value="Más de 300">Más de 300</option>
-          <option value="No aplica / No sé">No aplica / No sé</option>
-        </select>
-      </div>
-
-      <div class="col-span-1 md:col-span-2">
-        <fieldset>
-          <legend class="block text-sm font-bold text-light mb-2">
-            ¿Qué te gustaría mejorar con iLogs?
-          </legend>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="security"
-                name="fSecurity"
-                value="Seguridad en salidas escolares"
-                class="h-5 w-5 rounded-md accent-primary"
-              />
-              <label for="security" class="text-light"
-                >Seguridad en salidas</label
-              >
-            </div>
-            <div class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="digitalization"
-                name="fDigitalization"
-                value="Digitalizar el proceso de salida"
-                class="h-5 w-5 rounded-md accent-primary"
-              />
-              <label for="digitalization" class="text-light"
-                >Digitalizar la salida</label
-              >
-            </div>
-            <div class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="monitoring"
-                name="fMonitoring"
-                value="Gestión de permisos para salidas o eventos"
-                class="h-5 w-5 rounded-md accent-primary"
-              />
-              <label for="monitoring" class="text-light"
-                >Permisos para salidas</label
-              >
-            </div>
-            <div class="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="efficiency"
-                name="fEfficiency"
-                value="Agilizar el proceso de entrega"
-                class="h-5 w-5 rounded-md accent-primary"
-              />
-              <label for="efficiency" class="text-light"
-                >Agilizar la entrega</label
-              >
-            </div>
-          </div>
-        </fieldset>
-      </div>
-
-      <button
-        type="submit"
-        class="col-span-1 md:col-span-2 inline-flex items-center justify-center gap-2 border-2 border-light text-light font-bold rounded-xl cursor-pointer py-3 text-lg transition-colors duration-150 hover:bg-light hover:text-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light active:scale-[0.98]"
-      >
-        <Icon name="tabler:brand-whatsapp" class="w-5 h-5" aria-hidden="true" />
-        Contactar ahora
-      </button>
-    </form>
-
-    <p class="mt-4 text-center text-xs text-light/70 max-w-md">
-      Al enviar, abrirás WhatsApp con tus datos precargados para que nos
-      escribas directamente.
-    </p>
-  </div>
-</Section>
+  </Section>
+</section>
 
 <script>
   import { apiWhatsApp, munyaalPhone } from "../../utils/contants";

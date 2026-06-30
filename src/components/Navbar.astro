@@ -1,38 +1,206 @@
 ---
-import { socialLinks } from "../utils/contants";
+/*
+ * Navbar de la landing.
+ *
+ * Navegación por secciones de la home en vez de redes sociales (estas viven
+ * ahora solo en el Footer). Los enlaces usan rutas absolutas (/#id) para que
+ * funcionen tanto en la home como en otras páginas que usan este layout
+ * (ej. /faq): el navegador resuelve la ruta y salta al ancla.
+ *
+ * El navbar es fixed (h-16), por lo que el offset de las secciones al
+ * navegar se resuelve con `scroll-margin-top` en global.css.
+ */
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: "¿Qué es?", href: "/#que-es" },
+  { label: "Proceso", href: "/#proceso-de-entrega" },
+  { label: "Testimonio", href: "/#testimonio" },
+  { label: "Implementación", href: "/#implementacion" },
+];
 ---
 
-<nav
-  class="fixed top-0 bg-primary z-50 w-full h-16 shadow-md"
->
-  <div class="mx-auto max-w-6xl px-5 md:px-8 h-full flex justify-between items-center">
-  <img
-    src="/image/logo.webp"
-    alt="Ilogs"
-    class="icon w-12 h-12 md:w-20 md:h-20"
-  />
+<nav class="fixed top-0 bg-primary z-50 w-full h-16 shadow-md" data-navbar>
+  <div
+    class="mx-auto max-w-6xl px-5 md:px-8 h-full flex justify-between items-center"
+  >
+    <a href="/" class="inline-flex items-center" aria-label="iLogs — inicio">
+      <img
+        src="/image/logo.webp"
+        alt="iLogs"
+        class="icon w-12 h-12 md:w-20 md:h-20"
+      />
+    </a>
 
-  <div class="flex flex-row p-3 gap-3 items-center">
-    {socialLinks.map(({ name, href, icon: Icon, iconClass }) => (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={name}
-        class={`icon fill-light ${iconClass ?? ""}`}
+    {
+      /* Navegación desktop: links visibles a partir de md.
+         "Contacto" se enfatiza como botón outline para señalar la conversión,
+         coherente con el lenguaje de botones de Hero y Footer. */
+    }
+    <ul class="hidden md:flex items-center gap-6 lg:gap-8">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="text-light/90 hover:text-light text-sm md:text-base font-semibold transition-colors duration-150"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="/#contact-section"
+          class="inline-flex items-center justify-center rounded-xl border border-light/50 px-4 py-2 text-sm md:text-base font-bold text-light hover:bg-light hover:text-dark transition-colors duration-150"
+        >
+          Contacto
+        </a>
+      </li>
+    </ul>
+
+    {
+      /* Botón hamburguesa (mobile). Conmuta el panel inferior.
+         Se oculta en desktop donde los links son visibles. */
+    }
+    <button
+      type="button"
+      class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-light hover:bg-light/10 transition-colors"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="navbar-menu"
+      data-navbar-toggle
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+        data-navbar-icon="open"
       >
-        <Icon />
-      </a>
-    ))}
+        <line x1="4" y1="7" x2="20" y2="7"></line>
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="17" x2="20" y2="17"></line>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        class="w-6 h-6 hidden"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+        data-navbar-icon="close"
+      >
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
+    </button>
   </div>
+
+  {
+    /* Panel mobile. visible solo al abrir. Bg primario para mantener
+       continuidad visual con el navbar. */
+  }
+  <div
+    id="navbar-menu"
+    class="md:hidden hidden bg-primary border-t border-light/20"
+    data-navbar-menu
+  >
+    <ul class="px-5 py-4 flex flex-col gap-1">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block px-3 py-2.5 rounded-lg text-light/90 hover:text-light hover:bg-light/10 font-semibold transition-colors duration-150"
+            data-navbar-link
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="/#contact-section"
+          class="block px-3 py-2.5 mt-2 rounded-lg border border-light/50 text-center font-bold text-light hover:bg-light hover:text-dark transition-colors duration-150"
+          data-navbar-link
+        >
+          Contacto
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>
+
 <script>
+  // Menú móvil: abre/cierra el panel, swap de icono (hamburguesa ↔ cerrar)
+  // y cierre al navegar a una sección. Defensive sobre astro:after-swap por
+  // si se habilita ClientRouter en el futuro.
+  function initNavbar() {
+    const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+    if (!navbar || navbar.dataset.init) return;
+    navbar.dataset.init = "true";
+
+    const toggle = navbar.querySelector<HTMLButtonElement>(
+      "[data-navbar-toggle]",
+    );
+    const menu = navbar.querySelector<HTMLElement>("[data-navbar-menu]");
+    const iconOpen = navbar.querySelector<HTMLElement>(
+      '[data-navbar-icon="open"]',
+    );
+    const iconClose = navbar.querySelector<HTMLElement>(
+      '[data-navbar-icon="close"]',
+    );
+    if (!toggle || !menu) return;
+
+    function setOpen(isOpen: boolean) {
+      menu.classList.toggle("hidden", !isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+      iconOpen?.classList.toggle("hidden", isOpen);
+      iconClose?.classList.toggle("hidden", !isOpen);
+    }
+
+    toggle.addEventListener("click", () => {
+      const isOpen = !menu.classList.contains("hidden");
+      setOpen(!isOpen);
+    });
+
+    // Cerrar al elegir un destino (la navegación por ancla ocurre después).
+    navbar
+      .querySelectorAll<HTMLAnchorElement>("[data-navbar-link]")
+      .forEach((link) => {
+        link.addEventListener("click", () => setOpen(false));
+      });
+
+    // Cerrar con Escape para accesibilidad.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+  }
+
+  initNavbar();
+  document.addEventListener("astro:after-swap", initNavbar);
+</script>
+
+<script>
+  // Entrada del logo, coherente con el resto de secciones (GSAP).
+  // `.icon` solo aplica al logo ahora; respeta prefers-reduced-motion.
   import { gsap } from "gsap";
 
-  gsap.from(".icon", {
-    y: -100,
-    stagger: 0.25,
-    duration: 0.3,
+  gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+    gsap.from("[data-navbar] .icon", {
+      y: -100,
+      duration: 0.4,
+      ease: "power3.out",
+    });
   });
 </script>
