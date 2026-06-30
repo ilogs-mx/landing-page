@@ -1,36 +1,34 @@
 ---
 import WhatsAppButton from "../ui/WhatsAppButton.astro";
 import Section from "../ui/Section.astro";
-import Rule from "../../assets/svg/rule.svg";
-import Rule2 from "../../assets/svg/rule2.svg";
-import Pen from "../../assets/svg/pen.svg";
 ---
 
 <section class="hero bg-primary relative overflow-hidden">
-  <Section
-    class="pt-24 md:pt-28 pb-24 md:pb-28"
-    containerClass="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
-  >
-    <div class="hero-text flex flex-col items-center lg:items-start text-center lg:text-left">
+  <Section class="pt-24 md:pt-32 pb-14 md:pb-16">
+    <div
+      class="hero-text flex flex-col items-center lg:items-start text-center lg:text-left"
+    >
       <span
-        class="block text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-light/80 mb-4"
+        class="block text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-2 text-light/80"
       >
-        ¿Qué es iLogs?
+        ¿Quién recoge a cada alumno y cómo lo confirmas?
       </span>
       <h1
-        class="font-brand text-3xl md:text-5xl lg:text-6xl text-light leading-tight"
+        class="font-brand text-3xl md:text-5xl lg:text-6xl text-light leading-tight max-w-4xl"
       >
-        La app que digitaliza la salida de tus alumnos con QR.
+        Digitaliza la salida escolar con un proceso ágil, verificable y
+        confiable.
       </h1>
       <p
-        class="mt-4 text-base md:text-lg text-light/90 max-w-md leading-relaxed"
+        class="mt-2 text-base md:text-lg text-light/85 max-w-2xl leading-relaxed"
       >
-        iLogs sustituye listas manuales y llamadas por un código QR dinámico de
-        24 h: más seguridad para las familias y menos caos en la puerta de tu
-        escuela.
+        Autoriza, valida y confirma cada entrega con QR dinámicos y
+        notificaciones inmediatas.
       </p>
 
-      <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-start">
+      <div
+        class="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-start"
+      >
         <WhatsAppButton
           size="lg"
           message="¡Hola! Quiero agendar una demo de iLogs para mi escuela."
@@ -45,33 +43,24 @@ import Pen from "../../assets/svg/pen.svg";
         </a>
       </div>
     </div>
-
-    <div class="relative flex justify-center lg:justify-end">
-      <div class="hero-image relative w-52 md:w-72 lg:w-96">
-        <img
-          src="image/hero.png"
-          alt="App iLogs en uso durante la salida escolar"
-          class="w-full rotate-3 drop-shadow-2xl"
-          loading="eager"
-        />
-      </div>
-    </div>
   </Section>
 
-  <Rule
-    class="absolute z-10 w-20 lg:w-40 bottom-8 lg:bottom-24 left-0 -rotate-40 opacity-80"
-  />
-  <Rule2
-    class="absolute z-10 w-20 lg:w-40 top-20 left-0 lg:left-6 rotate-80 opacity-80"
-  />
-  <Pen
-    class="absolute z-10 w-16 lg:w-36 top-20 right-2 lg:right-6 -rotate-40 lg:rotate-45 opacity-80"
-  />
-
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 310" class="block w-full relative z-0">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1440 160"
+    class="block w-full relative z-0 h-[70px] sm:h-[80px] md:h-auto"
+    aria-hidden="true"
+    preserveAspectRatio="none"
+  >
+    <!-- Capa posterior: onda naranja fuerte que asoma por encima de la onda clara -->
+    <path
+      class="fill-primary"
+      d="M0,160 L0,70 C180,140 360,10 540,60 C720,110 900,20 1080,62 C1260,98 1380,52 1440,46 L1440,160 Z"
+    ></path>
+    <!-- Capa frontal: onda clara que suaviza la transición al fondo de la página -->
     <path
       class="fill-background"
-      d="M0,160L80,176C160,192,320,224,480,202.7C640,181,800,107,960,69.3C1120,32,1280,32,1360,32L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+      d="M0,160 L0,112 C200,150 380,78 540,100 C720,122 900,74 1080,98 C1260,118 1380,86 1440,92 L1440,160 Z"
     ></path>
   </svg>
 </section>
