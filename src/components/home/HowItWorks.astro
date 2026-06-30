@@ -1,14 +1,21 @@
 ---
 import Section from "../ui/Section.astro";
-import WhatsAppButton from "../ui/WhatsAppButton.astro";
+import VideoPlayer from "../ui/VideoPlayer.astro";
+import { Icon } from "astro-icon/components";
+
+const videoId = "PCoODwGT980";
+const videoTitle = "Presentación de iLogs";
+const thumbnail = "/image/banner-ilogs.webp";
 ---
 
-{/*
+{
+  /*
   Sección "Proceso de entrega".
   El encabezado se inlinea (en vez de usar SectionHeading) para poder acentuar
   con gradiente una parte del subtítulo. Cada paso vive como markup explícito
   (sin data-driven ni StepCard) para que el gráfico por paso sea claro de leer.
-*/}
+*/
+}
 
 <Section id="proceso-de-entrega" class="py-20 md:py-28 bg-light/50 how">
   <div class="max-w-3xl text-center mx-auto">
@@ -20,7 +27,7 @@ import WhatsAppButton from "../ui/WhatsAppButton.astro";
     <h2
       class="font-brand text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground"
     >
-      Cada entrega, <span class="hiw-accent">simple y confiable</span>
+      Entregas, <span class="text-gradient-accent">simples y confiables</span>
     </h2>
     <p class="mt-4 text-base md:text-lg leading-relaxed text-foreground/70">
       Un proceso simple de 3 pasos para autorizar, validar y confirmar cada
@@ -29,10 +36,12 @@ import WhatsAppButton from "../ui/WhatsAppButton.astro";
   </div>
 
   <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    {/*
+    {
+      /*
       Paso 1 — Genera: QR visible al centro.
       Animación: pulso ligero (escala sutil en loop).
-    */}
+    */
+    }
     <article
       class="step relative rounded-3xl border border-primary/20 bg-light/60 p-6 md:p-8 transition-shadow hover:shadow-lg"
     >
@@ -40,46 +49,22 @@ import WhatsAppButton from "../ui/WhatsAppButton.astro";
         class="hiw-graphic flex items-center justify-center aspect-square rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5"
         data-anim="pulse"
       >
-        <svg
-          class="hiw-qr w-28 h-28 text-foreground"
-          viewBox="0 0 64 64"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          aria-hidden="true"
-        >
-          {/* Marcos del QR */}
-          <rect x="6" y="6" width="16" height="16" rx="2" />
-          <rect x="42" y="6" width="16" height="16" rx="2" />
-          <rect x="6" y="42" width="16" height="16" rx="2" />
-          {/* Patrón interior simplificado */}
-          <rect x="12" y="12" width="4" height="4" fill="currentColor" />
-          <rect x="48" y="12" width="4" height="4" fill="currentColor" />
-          <rect x="12" y="48" width="4" height="4" fill="currentColor" />
-          <path d="M28 8h6M28 14h6M28 20h6" stroke-linecap="round" />
-          <path d="M44 28h6M50 28v6" stroke-linecap="round" />
-          <path d="M8 28h6M8 34h6M8 40h6" stroke-linecap="round" />
-          <path d="M28 28h10v10H28z" />
-        </svg>
+        <Icon name="qr-code" size={120} class="hiw-qr text-foreground" />
       </div>
-
-      <span
-        class="hiw-number mt-6 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-light font-brand text-lg shrink-0"
-      >
-        1
-      </span>
-      <h3 class="mt-5 font-brand text-xl md:text-2xl text-foreground">
-        Genera
+      <h3 class="mt-5 font-brand text-xl md:text-2xl text-primary">
+        1. Genera
       </h3>
       <p class="mt-3 text-base md:text-lg text-foreground/70 leading-relaxed">
         El tutor crea un QR único con vigencia y autorización específicas.
       </p>
     </article>
 
-    {/*
+    {
+      /*
       Paso 2 — Escanea: lector móvil / scanner.
       Animación: barrido vertical de la línea de scan.
-    */}
+    */
+    }
     <article
       class="step relative rounded-3xl border border-primary/20 bg-light/60 p-6 md:p-8 transition-shadow hover:shadow-lg"
     >
@@ -87,50 +72,30 @@ import WhatsAppButton from "../ui/WhatsAppButton.astro";
         class="hiw-graphic relative flex items-center justify-center aspect-square rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 overflow-hidden"
         data-anim="scan"
       >
-        <svg
-          class="w-28 h-28 text-foreground"
-          viewBox="0 0 64 64"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          {/* Marco de lector (esquinas) */}
-          <path d="M10 18V12a2 2 0 0 1 2-2h6" />
-          <path d="M54 18V12a2 2 0 0 0-2-2h-6" />
-          <path d="M10 46v6a2 2 0 0 0 2 2h6" />
-          <path d="M54 46v6a2 2 0 0 1-2 2h-6" />
-          {/* Mini QR escaneado */}
-          <rect x="24" y="24" width="16" height="16" rx="1.5" />
-          <path d="M28 28h2M30 28v2M34 28v2M34 34h2" />
-        </svg>
+        <Icon name="qr-scan" size={150} class="hiw-qr text-foreground" />
+
         {/* Línea de scan animada */}
         <span
-          class="hiw-scanline absolute left-4 right-4 h-[3px] rounded-full bg-gradient-to-r from-transparent via-[#F59E0B] to-transparent"
+          class="hiw-scanline absolute left-4 right-4 h-[3px] rounded-full bg-gradient-to-r from-transparent via-accent-amber to-transparent"
           aria-hidden="true"
         >
         </span>
       </div>
 
-      <span
-        class="hiw-number mt-6 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-light font-brand text-lg shrink-0"
-      >
-        2
-      </span>
-      <h3 class="mt-5 font-brand text-xl md:text-2xl text-foreground">
-        Escanea
+      <h3 class="mt-5 font-brand text-xl md:text-2xl text-primary">
+        2. Escanea
       </h3>
       <p class="mt-3 text-base md:text-lg text-foreground/70 leading-relaxed">
         El personal valida la información al instante.
       </p>
     </article>
 
-    {/*
+    {
+      /*
       Paso 3 — Confirma: campana / notificación.
       Animación: aparición / escala suave en loop.
-    */}
+    */
+    }
     <article
       class="step relative rounded-3xl border border-primary/20 bg-light/60 p-6 md:p-8 transition-shadow hover:shadow-lg"
     >
@@ -138,57 +103,34 @@ import WhatsAppButton from "../ui/WhatsAppButton.astro";
         class="hiw-graphic flex items-center justify-center aspect-square rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5"
         data-anim="bell"
       >
-        <svg
-          class="hiw-bell w-28 h-28 text-foreground"
-          viewBox="0 0 64 64"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          {/* Campana */}
-          <path d="M20 44h24a4 4 0 0 1-4-4V28a8 8 0 0 0-16 0v12a4 4 0 0 1-4 4Z" />
-          <path d="M28 48a4 4 0 0 0 8 0" />
-          <path d="M32 20v-4" />
-          {/* Badges de notificación */}
-          <circle cx="46" cy="22" r="6" fill="#10B981" stroke="none" />
-          <circle cx="18" cy="24" r="4" fill="#F59E0B" stroke="none" />
-        </svg>
+        <Icon name="bell" size={120} class="hiw-bell text-foreground" />
       </div>
 
-      <span
-        class="hiw-number mt-6 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-light font-brand text-lg shrink-0"
-      >
-        3
-      </span>
-      <h3 class="mt-5 font-brand text-xl md:text-2xl text-foreground">
-        Confirma
+      <h3 class="mt-5 font-brand text-xl md:text-2xl text-primary">
+        3. Confirma
       </h3>
       <p class="mt-3 text-base md:text-lg text-foreground/70 leading-relaxed">
         La entrega se registra y se notifica a los tutores al instante.
       </p>
     </article>
   </div>
-</Section>
 
-<style is:global>
-  /* Gradiente de acento para parte del subtítulo.
-     Se aplica via clase .hiw-accent en el título para acentuar
-     "simple y confiable". */
-  .hiw-accent {
-    background-image: linear-gradient(
-      90deg,
-      #f97316 0%,
-      #f59e0b 50%,
-      #10b981 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  {
+    /*
+    Video de presentación debajo de los 3 pasos.
+    Componente reutilizable (VideoPlayer) con fachada de miniatura;
+    el iframe de YouTube solo se carga al hacer click en play.
+    */
   }
-</style>
+  <div class="mt-12 md:mt-16">
+    <VideoPlayer
+      videoId={videoId}
+      videoTitle={videoTitle}
+      thumbnail={thumbnail}
+      caption="Conoce iLogs en menos de 2 minutos."
+    />
+  </div>
+</Section>
 
 <script>
   import { gsap } from "gsap";
@@ -232,21 +174,39 @@ import WhatsAppButton from "../ui/WhatsAppButton.astro";
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
-      }
+      },
     );
 
-    // Aparición / escala suave de la campana (paso 3).
-    gsap.fromTo(
-      '.how [data-anim="bell"] .hiw-bell',
-      { scale: 0.92 },
-      {
-        scale: 1,
-        duration: 1.6,
-        ease: "elastic.out(1, 0.5)",
-        repeat: -1,
-        repeatDelay: 0.8,
-        yoyo: true,
-      }
-    );
+    // Sacudida / notificación de la campana (paso 3).
+    // Pivote superior para que parezca colgada; rotación sutil con pausa entre repeticiones.
+    gsap.set('.how [data-anim="bell"] .hiw-bell', {
+      transformOrigin: "top center",
+    });
+
+    const bellShake = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 1.6,
+      defaults: { ease: "sine.out" },
+    });
+
+    bellShake
+      // Tire rápido a la derecha
+      .fromTo(
+        '.how [data-anim="bell"] .hiw-bell',
+        { rotation: 0 },
+        { rotation: 10, duration: 0.12 },
+      )
+      // Rebote a la izquierda
+      .to('.how [data-anim="bell"] .hiw-bell', {
+        rotation: -8,
+        duration: 0.18,
+        ease: "sine.inOut",
+      })
+      // Retorno amortiguado al centro
+      .to('.how [data-anim="bell"] .hiw-bell', {
+        rotation: 0,
+        duration: 0.6,
+        ease: "elastic.out(1.2, 0.4)",
+      });
   });
 </script>

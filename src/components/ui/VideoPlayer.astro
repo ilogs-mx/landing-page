@@ -1,0 +1,166 @@
+---
+/*
+ * VideoPlayer.astro
+ * Fachada ligera para incrustar un video de YouTube.
+ *
+ * Carga la miniatura + un overlay con botón play y solo inyecta el
+ * <iframe> cuando el usuario activa el botón. Así evitamos pedir el
+ * reproductor de YouTube en el render inicial y mejoramos rendimiento
+ * y privacidad. No usamos outerHTML destructivo: el <iframe> ya vive
+ * en el DOM con `src` vacío y se "enciende" al asignarle la URL.
+ *
+ * Props:
+ *  - videoId     (string): ID del video de YouTube.
+ *  - videoTitle  (string): descripción accesible (aria-label / title del iframe).
+ *  - thumbnail   (string): ruta de la miniatura (en /public).
+ *  - caption     (string, opcional): texto de apoyo sobre el overlay.
+ *  - className    (string, opcional): clases extra para el wrapper.
+ */
+interface Props {
+  videoId: string;
+  videoTitle: string;
+  thumbnail: string;
+  caption?: string;
+  class?: string;
+}
+
+const {
+  videoId,
+  videoTitle,
+  thumbnail,
+  caption,
+  class: className = "",
+} = Astro.props;
+
+const youtubeUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+const thumbnailAlt = `Miniatura del video: ${videoTitle}`;
+---
+
+<figure
+  class:list={[
+    "video-player group relative mx-auto w-full max-w-4xl overflow-hidden rounded-3xl border border-primary/20 bg-foreground shadow-lg",
+    className,
+  ]}
+  data-video-url={youtubeUrl}
+>
+  <div class="relative aspect-video">
+    {
+      /* Imagen de portada: lazy y descriptiva para accesibilidad. */
+    }
+    <img
+      src={thumbnail}
+      alt={thumbnailAlt}
+      class="absolute inset-0 h-full w-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+
+    {
+      /* Overlay oscuro pararemark el contraste del botón y el texto. */
+    }
+    <div
+      class="pointer-events-none absolute inset-0 bg-foreground/40 transition-opacity duration-300 group-[.is-playing]:opacity-0"
+      aria-hidden="true"
+    >
+    </div>
+
+    {
+      /* Texto de apoyo: visible hasta que arranca la reproducción. */
+    }
+    {
+      caption && (
+        <figcaption class="pointer-events-none absolute inset-x-0 bottom-0 p-5 md:p-6 text-center text-light">
+          <p class="font-brand text-lg md:text-xl text-light drop-shadow">
+            {caption}
+          </p>
+        </figcaption>
+      )
+    }
+
+    {
+      /* Botón play grande y accesible.
+         Es un <button> real, con aria-label y focus-visible, que
+         dispara la carga del iframe. */
+    }
+    <button
+      type="button"
+      class="video-player__play absolute inset-0 z-10 flex items-center justify-center text-light transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-amber/60"
+      aria-label={`Reproducir video: ${videoTitle}`}
+    >
+      <span
+        class="flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-accent-amber text-foreground shadow-xl transition-transform duration-300 group-hover:scale-110 group-focus-visible:scale-110"
+        aria-hidden="true"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class="ml-1 h-10 w-10 md:h-12 md:w-12"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M8 5.14v14l11-7-11-7z"
+          />
+        </svg>
+      </span>
+    </button>
+
+    {
+      /* Iframe "apagado" hasta el click: evita descargas iniciales y
+         permite destruir/limpiar simplemente quitando el src. */
+    }
+    <iframe
+      class="video-player__iframe pointer-events-none absolute inset-0 z-0 h-full w-full border-0 opacity-0 transition-opacity duration-300"
+      title={videoTitle}
+      data-src={youtubeUrl}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+    >
+    </iframe>
+  </div>
+</figure>
+
+<script>
+  // Activa el reproductor: asigna el src al iframe, lo muestra y
+  // oculta overlay + botón. Reversible si en el futuro queremos un
+  // botón "stop".
+  function initVideoPlayers(root: ParentNode = document) {
+    const players = root.querySelectorAll<HTMLElement>(".video-player");
+
+    players.forEach((player) => {
+      if (player.dataset.initialized) return;
+      player.dataset.initialized = "true";
+
+      const button = player.querySelector<HTMLButtonElement>(
+        ".video-player__play",
+      );
+      const iframe = player.querySelector<HTMLIFrameElement>(
+        ".video-player__iframe",
+      );
+      if (!button || !iframe) return;
+
+      button.addEventListener("click", () => {
+        const url = player.dataset.videoUrl;
+        if (!url) return;
+        // Apagamos el botón ANTES de asignar el src para que el click
+        // no colisione con el iframe al activarse (evita el “segundo
+        // click fantasma” que pausa el video recién arrancado).
+        button.classList.add("hidden");
+        player.classList.add("is-playing");
+        iframe.src = url;
+        // Activamos el iframe (visibilidad + interacción) en el frame
+        // siguiente para asegurar el fade.
+        requestAnimationFrame(() => {
+          iframe.classList.remove("pointer-events-none", "opacity-0");
+          iframe.classList.add("opacity-100");
+        });
+      });
+    });
+  }
+
+  // Init en carga y ante futuras navegaciones (view transitions).
+  initVideoPlayers();
+  document.addEventListener("astro:after-swap", () => initVideoPlayers());
+</script>
