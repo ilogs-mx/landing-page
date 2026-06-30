@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+
+/*
+ * Marca de agua decorativa con astro-icon + Tabler Icons.
+ *
+ * Regla de color aprobada:
+ * - tone="light"    → text-light/30    (sobre fondos primary)
+ * - tone="primary"  → text-primary/30  (sobre fondos claros)
+ *
+ * El icono se posiciona, dimensiona y rota desde `class`
+ * (p. ej. "absolute top-10 right-6 w-28 h-28 rotate-12").
+ * Va detrás del contenido: la sección aporta `relative overflow-hidden`
+ * + un contenedor `absolute inset-0 z-0`, y el contenido va con `relative z-10`.
+ *
+ * Es puramente decorativo: pointer-events-none + aria-hidden para que
+ * no compita con la interacción ni sea leído por lectores de pantalla.
+ */
+interface Props {
+  name: string;
+  tone?: "light" | "primary";
+  class?: string;
+}
+
+const { name, tone = "light", class: className = "" } = Astro.props;
+const toneClass = tone === "light" ? "text-light/30" : "text-primary/30";
+---
+
+<Icon
+  name={name}
+  class={`pointer-events-none select-none ${toneClass} ${className}`.trim()}
+  aria-hidden="true"
+/>
