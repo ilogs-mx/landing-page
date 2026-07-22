@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import N8nChat from "../components/N8nChat.astro";
 
 const { title } = Astro.props;
 
@@ -74,5 +75,6 @@ interface Props {
       <slot />
     </main>
     <Footer />
+    <N8nChat />
   </body>
 </html>

@@ -1,0 +1,52 @@
+---
+/*
+ * N8nChat.astro
+ *
+ * Inyecta el widget de chat de n8n en modo flotante (botón + ventana fija).
+ *
+ * Decisiones:
+ * - El `<div id="n8n-chat" hidden>` satisface el selector por defecto de
+ *   `createChat` (`target: '#n8n-chat'`). En modo 'window' actúa solo como
+ *   anclaje; se mantiene `hidden` para no ocupar layout en SSR markup.
+ * - El script de Astro se procesa con Vite y se inyecta como módulo al
+ *   cliente, por lo que ni `createChat` ni el CSS de @n8n/chat se evalúan en
+ *   build/SSR. Se cumple el requisito de ejecución exclusiva en el browser.
+ * - Idempotente: marca el target con `data-n8n-chat-init` para que
+ *   re-hidrataciones del componente (p.ej. con ClientRouter en el futuro)
+ *   no dupliquen el widget.
+ * - Pensado para Layout.astro. NO debe incluirse en MarkdownLayout.astro
+ *   (documentos legales), donde ensuciaría la lectura de los términos.
+ */
+---
+
+<div id="n8n-chat"></div>
+
+<script>
+  import "@n8n/chat/style.css";
+  import { createChat } from "@n8n/chat";
+
+  const WEBHOOK_URL =
+    "https://vmi3035728.contaboserver.net/webhook/d9a14464-e5ce-457c-a424-ec5a7605cd64/chat";
+
+  const target = document.getElementById("n8n-chat");
+  if (target && !target.dataset.n8nChatInit) {
+    target.dataset.n8nChatInit = "true";
+    createChat({
+      webhookUrl: WEBHOOK_URL,
+      showWelcomeScreen: false,
+      initialMessages: ["¡Hola! 👋"],
+      defaultLanguage: "es" as 'en',
+      i18n: {
+        es: {
+          title: "¡Hola! 👋",
+          subtitle: "Deja tu pregunta y te responderé lo antes posible.",
+          footer: "",
+          getStarted: "Iniciar conversación",
+          inputPlaceholder: "Escribe tu pregunta...",
+          closeButtonTooltip: "Cerrar chat",
+        },
+      },
+    });
+  }
+</script>
+
