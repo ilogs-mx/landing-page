@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         workspace:
-          - namespace: ilogs
+          - namespace: websites
             deploy: landing-page
             container: landing-page
     steps:
