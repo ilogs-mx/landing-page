@@ -16,10 +16,166 @@
  *   no dupliquen el widget.
  * - Pensado para Layout.astro. NO debe incluirse en MarkdownLayout.astro
  *   (documentos legales), donde ensuciaría la lectura de los términos.
+ *
+ * Theming:
+ * - El widget inyecta su DOM dinámicamente, así que el `<style>` debe ser
+ *   `is:global`; los selectores `.chat-*` / `.n8n-chat` son específicos y
+ *   no chocan con el resto del sitio.
+ * - Primero se reescriben las CSS custom properties de @n8n/chat (paleta
+ *   iLogs) y después se afinan detalles que las variables no cubren
+ *   (sombra cálida, ring de focus, fuente de títulos).
  */
 ---
 
 <div id="n8n-chat"></div>
+
+<style is:global>
+  /* -----------------------------------------------------------
+   * 1. Paleta iLogs expuesta como variables de @n8n/chat
+   * --------------------------------------------------------- */
+  .n8n-chat {
+    /* Marca: naranja primario, jade como acento secundario */
+    --chat--color--primary: #f28705;
+    --chat--color--primary-shade-50: #d97a04;
+    --chat--color--primary--shade-100: #b86804;
+    --chat--color--secondary: #11cac7;
+    --chat--color-secondary-shade-50: #0fb0ad;
+
+    /* Neutros alineados al sitio (fondo #f2f2f2, texto #262626) */
+    --chat--color-white: #ffffff;
+    --chat--color-light: #f2f2f2;
+    --chat--color-light-shade-50: #e6e6e6;
+    --chat--color-light-shade-100: #c2c2c2;
+    --chat--color-medium: #d2d4d9;
+    --chat--color-dark: #262626;
+    --chat--color-disabled: #c2c2c2;
+    --chat--color-typing: #404040;
+
+    /* Geometría cálida y redondeada */
+    --chat--spacing: 1rem;
+    --chat--border-radius: 0.875rem;
+    --chat--transition-duration: 0.2s;
+    --chat--font-family: "Nobel Uno", system-ui, -apple-system, sans-serif;
+
+    /* Ventana */
+    --chat--window--width: 380px;
+    --chat--window--height: 600px;
+    --chat--window--border: 1px solid rgba(242, 135, 5, 0.18);
+    --chat--window--border-radius: 1.25rem;
+
+    /* Header naranja */
+    --chat--header--padding: 1rem 1.25rem;
+    --chat--header--background: #f28705;
+    --chat--header--color: #ffffff;
+    --chat--heading--font-size: 1.25rem;
+    --chat--subtitle--font-size: 0.875rem;
+    --chat--subtitle--line-height: 1.4;
+
+    /* Burbujas coherentes con la marca */
+    --chat--message--font-size: 0.9375rem;
+    --chat--message--padding: 0.75rem 1rem;
+    --chat--message--border-radius: 1rem;
+    --chat--message-line-height: 1.5;
+    --chat--message--margin-bottom: 0.75rem;
+    --chat--message--bot--background: #ffffff;
+    --chat--message--bot--color: #262626;
+    --chat--message--bot--border: 1px solid #ececec;
+    --chat--message--user--background: #f28705;
+    --chat--message--user--color: #ffffff;
+    --chat--message--user--border: none;
+
+    /* Input redondeado con focus naranja */
+    --chat--textarea--height: 48px;
+    --chat--input--background: #ffffff;
+    --chat--input--text-color: #262626;
+    --chat--input--border: 1px solid #e6e6e6;
+    --chat--input--border-radius: 9999px;
+    --chat--input--border-active: 1px solid #f28705;
+    --chat--input--padding: 0.75rem 1rem;
+
+    /* Botón flotante */
+    --chat--toggle--size: 60px;
+    --chat--toggle--background: #f28705;
+    --chat--toggle--hover--background: #d97a04;
+    --chat--toggle--active--background: #b86804;
+    --chat--toggle--color: #ffffff;
+    --chat--toggle--border-radius: 50%;
+
+    /* Botón enviar dentro del input */
+    --chat--input--send--button--background: #f28705;
+    --chat--input--send--button--color: #ffffff;
+    --chat--input--send--button--background-hover: #d97a04;
+    --chat--input--send--button--color-hover: #ffffff;
+
+    /* Botón cerrar (X) del header: blanco sobre naranja */
+    --chat--close--button--color-hover: #efc22b;
+  }
+
+  /* -----------------------------------------------------------
+   * 2. Overrides de detalles que las variables no alcanzan
+   * --------------------------------------------------------- */
+
+  /* Sombra cálida y borde marcado en la ventana */
+  .n8n-chat .chat-window {
+    box-shadow:
+      0 24px 60px -20px rgba(38, 38, 38, 0.28),
+      0 8px 24px -8px rgba(242, 135, 5, 0.25);
+    border: 2px solid #ffffff;
+    overflow: hidden;
+  }
+
+  /* Tipografía de marca: título en Oliciy, cuerpo en Nobel Uno */
+  .n8n-chat .chat-heading {
+    font-family: "Oliciy", "Nobel Uno", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .n8n-chat .chat-message,
+  .n8n-chat .chat-input,
+  .n8n-chat .chat-footer {
+    font-family: "Nobel Uno", sans-serif;
+  }
+
+  /* Header con esquinas superiores redondeadas coherentes con la ventana */
+  .n8n-chat .chat-header {
+    border-top-left-radius: calc(1.25rem - 2px);
+    border-top-right-radius: calc(1.25rem - 2px);
+  }
+
+  /* Input: focus con anillo naranja suave */
+  .n8n-chat .chat-input:focus,
+  .n8n-chat .chat-input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(242, 135, 5, 0.2);
+  }
+
+  /* Botón enviar: forma circular coherente con el toggle */
+  .n8n-chat .chat-input-send-button {
+    border-radius: 50%;
+  }
+
+  /* Botón flotante: anillo + sombra cálida */
+  .n8n-chat .chat-window-toggle {
+    box-shadow:
+      0 12px 28px -6px rgba(242, 135, 5, 0.55),
+      0 4px 10px -2px rgba(38, 38, 38, 0.2);
+    transition:
+      transform var(--chat--transition-duration) ease,
+      box-shadow var(--chat--transition-duration) ease;
+  }
+  .n8n-chat .chat-window-toggle:hover {
+    transform: translateY(-1px) scale(1.03);
+  }
+
+  /* "Powered by" discreto, alineado al sitio */
+  .n8n-chat .chat-powered-by {
+    color: #8a8a8a;
+    font-size: 0.7rem;
+  }
+  .n8n-chat .chat-powered-by a {
+    color: #8a8a8a;
+  }
+</style>
 
 <script>
   import "@n8n/chat/style.css";
@@ -34,12 +190,12 @@
     createChat({
       webhookUrl: WEBHOOK_URL,
       showWelcomeScreen: false,
-      initialMessages: ["¡Hola! 👋"],
+      initialMessages: ["¡Hola! 👋 Soy Lia. ¿Cómo puedo ayudarte?"],
       defaultLanguage: "es" as 'en',
       i18n: {
         es: {
           title: "¡Hola! 👋",
-          subtitle: "Deja tu pregunta y te responderé lo antes posible.",
+          subtitle: "Cuéntame qué necesitas y te ayudo.",
           footer: "",
           getStarted: "Iniciar conversación",
           inputPlaceholder: "Escribe tu pregunta...",
@@ -49,4 +205,3 @@
     });
   }
 </script>
-
